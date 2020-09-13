@@ -2,12 +2,10 @@ package algdat.uke2.seksjon124;
 
 import algdat.Tabell;
 
-import java.util.Arrays;
-
-public class Oppgave1 {
+public class Oppgave2 {
     public static void main(String[] args) {
         int[] a = Tabell.randPerm(20);
-        int[] b = Tabell.nestMaks(a);
+        int[] b = Tabell.nestMaksSF(a);
 
         int m = b[0];
         int nm = b[1];

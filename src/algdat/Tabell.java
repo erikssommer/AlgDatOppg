@@ -1,6 +1,7 @@
 package algdat;
 
 import java.util.Arrays;
+import java.util.NoSuchElementException;
 import java.util.Random;
 
 public class Tabell {
@@ -35,9 +36,8 @@ public class Tabell {
     }
 
     public static int maks(int[] a, int fra, int til){
-        if (fra < 0 || til > a.length || fra >= til){
-            throw new IllegalArgumentException("Illegalt intervall");
-        }
+
+        fratilKontroll(a.length, fra, til);
 
         int m = fra;
         int maksverdi = a[fra];
@@ -106,6 +106,11 @@ public class Tabell {
     }
 
     public static void fratilKontroll(int tabellengde, int fra, int til){
+
+        if (tabellengde == 0){
+            throw new IllegalArgumentException("Tabellengden er null");
+        }
+
         if (fra < 0){
             throw new ArrayIndexOutOfBoundsException("fra(" + fra + ") er negativ!");
         }
@@ -116,6 +121,10 @@ public class Tabell {
 
         if (fra > til){
             throw new ArrayIndexOutOfBoundsException("fra(" + fra + ") > til(" + til + ") - illegalt intervall!");
+        }
+
+        if (fra == til) {
+            throw new NoSuchElementException("fra(" + fra + ") = til(" + til + ") - tomt tabellintervall!");
         }
     }
 
@@ -132,6 +141,76 @@ public class Tabell {
         }
     }
 
+    public static int[] nestMaks(int[] a){
+        int n = a.length;
 
+        if (n < 2) throw new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
 
+        int m = maks(a);
+
+        int nm;
+
+        if (m == 0){
+            nm = maks(a, 1, n);
+        }else if (m == n - 1){
+            nm = maks(a, 0, n -1);
+        }else {
+            int mv = maks(a, 0, m);
+            int mh = maks(a, m + 1, n);
+            nm = a[mh] > a[mv] ? mh : mv;
+        }
+        return new int[] {m, nm};
+    }
+
+    public static int[] nestMaksSF(int[] a){
+
+        int n = a.length;
+
+        if (n < 2) throw new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = maks(a);
+
+        bytt(a, 0, m);
+
+        int nm = maks(a, 1, n);
+
+        bytt(a, m, 0);
+
+        return new int[] {m, nm};
+    }
+
+    public static int[] nestMaksSB(int[] a){
+
+        int n = a.length;
+
+        if (n < 2) throw new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = maks(a);
+
+        bytt(a, m, n - 1);
+
+        int nm = maks(a, 0, n - 2);
+
+        bytt(a, m, n - 1);
+
+        return new int[] {m, nm};
+    }
+
+    public static void sortering(int[] a){
+
+        int n = a.length;
+
+        if (n < 2) throw new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        for (int i = n-1; i > 0; i--){
+
+            int m = maks(a, 0, i);
+
+            bytt(a, m, i);
+
+            int nm = maks(a, 0, i);
+
+            bytt(a, m, i-1);
+        }
+    }
 }
