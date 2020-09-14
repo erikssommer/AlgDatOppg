@@ -252,4 +252,37 @@ public class Tabell {
             }
         }
     }
+
+    public static void snu(int[] a, int v, int h){
+        while (v < h){
+            bytt(a, v++, h--);
+        }
+    }
+
+    public static void snu(int[] a, int v){
+        snu(a, v, a.length-1);
+    }
+
+    public static void snu(int[] a){
+        snu(a, 0, a.length-1);
+    }
+
+    public static boolean nestePermutasjon(int[] a){
+        int i = a.length -2;
+        while (i >= 0 && a[i] > a[i +1]){
+            i--;
+        }
+        if (i < 0){
+            return false;
+        }
+
+        int j = a.length -1;
+        while (a[j] < a[i]){
+            j--;
+        }
+        bytt(a,i,j);
+        snu(a,i + 1);
+        return true;
+    }
+
 }
