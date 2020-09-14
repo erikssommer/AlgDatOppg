@@ -210,7 +210,46 @@ public class Tabell {
 
             int nm = maks(a, 0, i);
 
-            bytt(a, m, i-1);
+            bytt(a, nm, i-1);
+        }
+    }
+
+    public static int[] nestMaksTR(int[] a){ //Turneringstre
+        int n = a.length;
+
+        if (n < 2) throw new java.util.NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int[] b = new int[2*n];
+        //System.arraycopy(a,0,b,n,n);
+        kopier(a,0,b,n,n);
+
+        for (int k = 2*n-2; k > 1; k -= 2){
+            b[k/2] = Math.max(b[k],b[k+1]);
+        }
+
+        int maksverdi = b[1];
+        int nestmaksverdi = Integer.MIN_VALUE;
+
+        for (int m = 2*n -1, k = 2; k < m; k *= 2){
+            int temp = b[k+1];
+            if (maksverdi != b[k]){
+                temp = b[k];
+                k++;
+            }
+            if (temp > nestmaksverdi){
+                nestmaksverdi = temp;
+            }
+        }
+        return new int[] {maksverdi, nestmaksverdi};
+    }
+
+    public static void kopier(int[] a, int i, int[] b, int j, int ant){
+        int aIndex = i;
+        for (int k = j; k < ant*2; k++){
+            if (aIndex < a.length){
+                b[k] = a[aIndex];
+                aIndex++;
+            }
         }
     }
 }
