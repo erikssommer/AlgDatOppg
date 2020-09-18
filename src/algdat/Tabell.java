@@ -375,4 +375,184 @@ public class Tabell {
 
         return verdi == a[i] ? i : -(i +1);
     }
+
+    public static int linearsokReturSisteVerdi(int[] a, int verdi){
+        if (a.length == 0 || verdi > a[a.length-1]){
+            return -(a.length +1);
+        }
+        int i = a.length-1;
+        for ( ; a[i] > verdi; i--);
+
+        return verdi == a[i] ? i : -(i +1);
+    }
+
+    //TODO denne trenger nok litt mer jobb
+    public static int linearsok(int[] a, int k, int verdi){
+        if (a.length == 0 || verdi > a[a.length-1]){
+            return -(a.length +1);
+        }
+        if (k < 0){
+            throw new IllegalArgumentException("Hoppelengden kan ikke være negativ");
+        }
+
+        for (int i = 0; i < i + k && i < a.length; i += k){
+            if (verdi < a[i]){
+                for (int j = i-k; j < i + k; j++){
+                    if (a[j] == verdi){
+                        return j;
+                    }
+                }
+            }
+        }
+        return -1;
+    }
+
+    public static int kvadratrotsok(int[] a, int verdi){
+        int k = (int) Math.sqrt(a.length);
+        if (verdi < a[k]){
+            for (int i = 0; i < k; i++){
+                if (verdi == a[i]){
+                    return i;
+                }
+            }
+        }else {
+            for (int i = k; i < a.length; i++){
+                if (verdi == a[i]){
+                    return i;
+                }
+            }
+        }
+        return -1;
+    }
+
+    //Returnerer siste index
+    public static int binaersokV1(int[] a, int fra, int til, int verdi){
+        fratilKontroll(a.length, fra, til);
+        int v = fra;
+        int h = til -1;
+
+        while (v <= h){
+            int m = (v + h)/2;
+            int midtverdi = a[m];
+
+            if (verdi == midtverdi){
+                return m;
+            }else if (verdi > midtverdi){
+                v = m + 1;
+            }else {
+                h = m -1;
+            }
+        }
+        return -(v + 1);
+    }
+
+    //Returnerer siste index
+    public static int binaersokV2(int[] a, int fra, int til, int verdi){
+        fratilKontroll(a.length, fra, til);
+        int v = fra;
+        int h = til -1;
+
+        while (v <= h){
+            int m = (v + h)/2;
+            int midtverdi = a[m];
+
+            if (verdi > midtverdi){
+                v = m + 1;
+            }else if (verdi < midtverdi){
+                h = m - 1;
+            }else {
+                return m;
+            }
+        }
+        return -(v + 1);
+    }
+
+    //Returnerer første index
+    public static int binaersokV3(int[] a, int fra, int til, int verdi){
+        fratilKontroll(a.length, fra, til);
+        int v = fra;
+        int h = til -1;
+
+        while (v < h){
+            int m = (v + h)/2;
+
+            if (verdi > a[m]){
+                v = m + 1;
+            }else {
+                h = m;
+            }
+        }
+
+        if (h < v || verdi < a[v]){
+            return -(v + 1);
+        }else if (verdi == a[v]){
+            return v;
+        }else {
+            return -(v + 2);
+        }
+    }
+
+    public static int binaersokV1(int[] a, int verdi){
+        return binaersokV1(a, 0, a.length, verdi);
+    }
+
+    public static int binaersokV2(int[] a, int verdi){
+        return binaersokV2(a, 0, a.length, verdi);
+    }
+
+    public static int binaersokV3(int[] a, int verdi){
+        return binaersokV3(a, 0, a.length, verdi);
+    }
+
+    public static void innsettingssortering(int[] a){
+        for (int i = 1; i < a.length; i++){
+            int verdi = a[i];
+            int j = i - 1;
+            for (; j >= 0 && verdi < a[j]; j--){
+                a[j+1] = a[j];
+            }
+            a[j +1] = verdi;
+        }
+    }
+
+    public static void innsettingssortering(int[] a, int fra, int til){
+        for (int i = fra; i <= til; i++){
+            int verdi = a[i];
+            int j = i - 1;
+            for (; j >= fra && verdi < a[j]; j--){
+                a[j+1] = a[j];
+            }
+            a[j +1] = verdi;
+        }
+    }
+
+    public static void innsettingssorteringV2(int[] a){
+        for (int i = 1; i < a.length; i++){
+            int temp = a[i];
+            for (int j = i - 1; j >= 0 && temp <a [j]; j--) {
+                Tabell.bytt(a, j, j + 1);
+            }
+        }
+    }
+
+    public static void shell(int[] a, int k) {
+        for (int i = k; i < a.length; i++) {
+            int temp= a[i];
+            int j = i - k;
+            for (; j >= 0 && temp < a[j]; j -= k) {
+                a[j + k] = a[j];
+                a[j + k] = temp;
+            }
+        }
+    }
+
+    public static boolean erSortert(int[] a){
+        for (int i = 1; i < a.length; i++){
+            if (a[i-1] > a[i]){
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
