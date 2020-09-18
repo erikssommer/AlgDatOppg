@@ -555,4 +555,71 @@ public class Tabell {
         return true;
     }
 
+    public static int maks(double[] a){
+        int m = 0;
+        double maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i] > maksverdi){
+                maksverdi = a[m];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    public static int maks(String[] a ){
+        int m = 0;
+        String maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i].compareTo(maksverdi) > 0){
+                maksverdi = a[m];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    public static int maks(char[] a){
+        int m = 0;
+        char maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i] > maksverdi){
+                maksverdi = a[m];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    public static int maks(Integer[] a){
+        int m = 0;
+        Integer maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i].compareTo(maksverdi) > 0){
+                maksverdi = a[m];
+                m = i;
+            }
+        }
+        return m;
+    }
+
+    //Generiske metoder
+
+    public static <T extends Comparable<? super T>> int maks(T[] a){
+        int m = 0;
+        T maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i].compareTo(maksverdi) > 0){
+                maksverdi = a[i];
+                m = i;
+            }
+        }
+        return m;
+    }
+
 }
