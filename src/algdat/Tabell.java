@@ -607,7 +607,7 @@ public class Tabell {
         return m;
     }
 
-    //Generiske metoder
+    //Generiske metoder (Start)
 
     public static <T extends Comparable<? super T>> int maks(T[] a){
         int m = 0;
@@ -621,5 +621,54 @@ public class Tabell {
         }
         return m;
     }
+
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a){
+        for (int i = 1; i < a.length; i++){
+            T verdi = a[i];
+            int j = i - 1;
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0; j--){
+                a[j+1] = a[j];
+            }
+            a[j + 1] = verdi;
+        }
+    }
+
+    public static void skriv(Object[] a, int fra, int til){
+        for (int i = fra; i < til; i++){
+            System.out.print(a[i] + " ");
+        }
+        System.out.print(a[til]); //For å unngå mellomrom til slutt
+    }
+
+    public static void skriv(Object[] a){
+        skriv(a, 0, a.length-1);
+    }
+
+    public static void skrivln(Object[] a){
+        skriv(a, 0, a.length-1);
+        System.out.println(); //For ny linje
+    }
+
+    public static void bytt(Object[] a, int i, int j){
+        Object temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+
+    public static Integer[] randPermInteger(int n){
+        Integer[] a = new Integer[n];
+        Arrays.setAll(a, i -> i +1);
+
+        Random r = new Random();
+
+        for (int k = n - 1; k > 0; k--){
+            int i = r.nextInt(k+1);
+            bytt(a,k,i);
+        }
+        return a;
+    }
+
+    public static void f(int a, Integer b) { }
+    public static void f(Integer a, int b) { }
 
 }
