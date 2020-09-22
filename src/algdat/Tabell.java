@@ -1,5 +1,7 @@
 package algdat;
 
+import algdat.eksempelklasser.Komparator;
+
 import java.util.Arrays;
 import java.util.NoSuchElementException;
 import java.util.Random;
@@ -670,5 +672,30 @@ public class Tabell {
 
     public static void f(int a, Integer b) { }
     public static void f(Integer a, int b) { }
+
+    public static <T> void innsettingssortering(T[] a, Komparator<? super T> c){
+        for (int i = 1; i < a.length; i++){
+            T verdi = a[i];
+            int j = i -1;
+
+            for (; j >= 0 && c.compare(verdi, a[j]) < 0; j--){
+                a[j+1] = a[j];
+            }
+            a[j+1] = verdi;
+        }
+    }
+
+    public static <T> int maks(T[] a, Komparator<? super T> c){
+        int m = 0;
+        T maksverdi = a[m];
+
+        for (int i = 1; i < a.length; i++){
+            if (c.compare(a[i],maksverdi) > 0){
+                maksverdi = a[i];
+                m = i;
+            }
+        }
+        return m;
+    }
 
 }
