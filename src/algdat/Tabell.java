@@ -1,8 +1,10 @@
 package algdat;
 
+import algdat.eksempelklasser.Funksjon;
 import algdat.eksempelklasser.Komparator;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.Random;
 
@@ -698,4 +700,143 @@ public class Tabell {
         return m;
     }
 
+    public static <T> int maks(T[] a, int fra, int til, Comparator<? super T> c) {
+        if (fra < 0 || til > a.length || fra >= til) {
+            throw new IllegalArgumentException("Illegalt intervall!");
+        }
+
+        int m = fra;
+        T maksverdi = a[fra];
+
+        for (int i = fra + 1; i < til; i++) {
+            if (c.compare(a[i], maksverdi) > 0) {
+                m = i;
+                maksverdi = a[m];
+            }
+        }
+
+        return m;
+    }
+
+    public static <T> void utvalgssortering(T[] a, Comparator<? super T> c) {
+        for (int k = a.length; k > 1; k--) {
+            bytt(a,maks(a,0,k,c),k-1);
+        }
+    }
+
+    private static <T> void kvikksortering(T[] a, int v, int h, Comparator<? super T> c) {
+        if (v >= h) {
+            return;
+        }
+
+        int p = sParter(a,v,h,(v + h)/2,c);
+        kvikksortering(a,v,p-1,c);
+        kvikksortering(a,p+1,h,c);
+    }
+
+    public static <T> void kvikksortering(T[] a, Comparator<? super T> c) {
+        kvikksortering(a,0,a.length-1,c);
+    }
+
+    public static <T> int parter(T[] a, int v, int h, T skilleverdi, Comparator<? super T> c) {
+        while (v <= h && c.compare(a[v],skilleverdi) < 0){
+            v++;
+        }
+        while (v <= h && c.compare(skilleverdi,a[h]) <= 0){
+            h--;
+        }
+
+        while (true) {
+            if (v < h) {
+                Tabell.bytt(a,v++,h--);
+            } else {
+                return v;
+            }
+            while (c.compare(a[v],skilleverdi) < 0) {
+                v++;
+            }
+            while (c.compare(skilleverdi,a[h]) <= 0){
+                h--;
+            }
+        }
+    }
+
+    public static <T> int parter(T[] a, T skilleverdi, Comparator<? super T> c) {
+        return parter(a,0,a.length-1,skilleverdi,c);
+    }
+
+    public static <T> int sParter(T[] a, int v, int h, int k, Comparator<? super T> c) {
+        if (v < 0 || h >= a.length || k < v || k > h){
+            throw new IllegalArgumentException("Ulovlig parameterverdi");
+        }
+
+        bytt(a,k,h);
+        int p = parter(a,v,h-1,a[h],c);
+        bytt(a,p,h);
+
+        return p;
+    }
+
+    private static <T> void flett(T[] a, T[] b, int fra, int m, int til, Comparator<? super T> c) {
+        int n = m - fra;
+        System.arraycopy(a,fra,b,0,n);
+
+        int i = 0, j = m, k = fra;
+
+        while (i < n && j < til){
+            a[k++] = c.compare(b[i],a[j]) < 0 ? b[i++] : a[j++];
+        }
+
+        while (i < n){
+            a[k++] = b[i++];
+        }
+    }
+
+    private static <T> void flettesortering(T[] a, T[] b, int fra, int til, Comparator<? super T> c) {
+        if (til - fra <= 1){
+            return;
+        }
+
+        int m = (fra + til)/2;
+
+        flettesortering(a,b,fra,m,c);
+        flettesortering(a,b,m,til,c);
+
+        flett(a,b,fra,m,til,c);
+    }
+
+    public static <T> void flettesortering(T[] a, Comparator<? super T> c) {
+        T[] b = (T[]) new Object[a.length / 2];
+        flettesortering(a, b, 0, a.length, c);
+    }
+    /*
+    public static <T, R extends Comparable<? super R>> int binarySearchBy(T[] list, R pivotKey, Funksjon<? super T, ? extends R> selector) {
+        int low = 0;
+        int high = list.length - 1;
+        while (low <= high) {
+            int mid = (low + high) >>> 1;
+            int ord = selector.anvend(list[mid]).compareTo(pivotKey);
+            if (ord < 0) {
+                low = mid + 1;
+            } else if (ord > 0) {
+                high = mid - 1;
+            } else {
+                return mid;
+            }
+        }
+        return ~high;
+    }
+
+    public static <T, R extends Comparable<? super R>> int intervalBinarySearchBy(T[] list, R min, R max, Funksjon<? super T, ? extends R> selector) {
+        int idx = binarySearchBy(list, max, selector);
+        if (idx >= 0) return idx;
+        idx = ~idx;
+        return (idx < list.length && min.compareTo(selector.anvend(list[idx])) ? idx : -1;
+    }
+
+    public static <T, R extends Comparable<? super R> > Comparator<T> comparatorBy(Funksjon<? super T, ? extends R> selector) {
+        return (a, b) -> selector.anvend(a).compareTo(selector.anvend(b));
+    }
+
+     */
 }

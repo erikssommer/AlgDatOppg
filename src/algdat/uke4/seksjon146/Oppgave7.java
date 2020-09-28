@@ -1,13 +1,13 @@
 package algdat.uke4.seksjon146;
 
 import algdat.Tabell;
-import algdat.eksempelklasser.Person;
+import algdat.eksempelklasser.Komparator;
 import algdat.eksempelklasser.Student;
 import algdat.eksempelklasser.Studium;
 
 import java.util.Arrays;
 
-public class Oppgave3 {
+public class Oppgave7 {
     public static void main(String[] args) {
         Student[] s = new Student[5];
         s[0] = new Student("Kari","Svendsen", Studium.Data);
@@ -16,7 +16,12 @@ public class Oppgave3 {
         s[3] = new Student("Azra","Zukanovic", Studium.IT);
         s[4] = new Student("Kari","Pettersen", Studium.Data);
 
-        Tabell.innsettingssortering(s, (Person::compareTo));
+        Komparator<Student> c = (s1, s2) -> {
+            int cmp = s1.studium().toString().compareTo(s2.studium().toString());
+            return cmp != 0 ? cmp : s1.compareTo(s2);
+        };
+
+        Tabell.innsettingssortering(s, c);
         System.out.println(Arrays.toString(s));
     }
 }
