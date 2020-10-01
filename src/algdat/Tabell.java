@@ -1,6 +1,5 @@
 package algdat;
 
-import algdat.eksempelklasser.Funksjon;
 import algdat.eksempelklasser.Komparator;
 
 import java.util.Arrays;
@@ -805,6 +804,7 @@ public class Tabell {
         flett(a,b,fra,m,til,c);
     }
 
+    @SuppressWarnings("unchecked")
     public static <T> void flettesortering(T[] a, Comparator<? super T> c) {
         T[] b = (T[]) new Object[a.length / 2];
         flettesortering(a, b, 0, a.length, c);
@@ -839,4 +839,171 @@ public class Tabell {
     }
 
      */
+
+    // Metoder med rekursjon/rekursive metoder
+
+    public static int a(int n){
+        if (n == 0){
+            return 1;
+        } else if (n == 1){
+            return 2;
+        } else{
+            return 2*a(n-1) + 3* a(n-2);
+        }
+    }
+
+    public static int tverrsum(int n){
+        if (n < 10){
+            return n;
+        }else {
+            return tverrsum(n/10) + (n%10);
+        }
+    }
+
+    public static int tverrsumURek(int n){
+        int tall1, tall2, tall3;
+
+        tall1 = n / 100;        // --> 7,51 = 7
+        tall2 = (n % 100) / 10; // --> (51) / 10 = 5,1 = 5
+        tall3 = n % 10;         // --> 1
+
+        return tall1 + tall2 + tall3;
+    }
+
+    public static int tverrsumUtskrift(int n) {
+        System.out.println("tverrsum(" + n + ") starter!");
+        int sum = (n < 10) ? n : tverrsumUtskrift(n / 10) + (n % 10);
+        System.out.println("tverrsum(" + n + ") er ferdig!");
+        return sum;
+    }
+
+    public static int sifferrot(int n){
+        if (n < 10){
+            return n;
+        }else {
+            return sifferrot(tverrsum(n/10) + (n%10));
+        }
+    }
+
+    public static int euklid(int a, int b){
+        if (b == 0){
+            return a;
+        }
+        int r = a % b;
+        return euklid(b, r);
+    }
+
+    public static int euklidUtskrift(int a, int b){
+        if (b == 0){
+            return a;
+        }
+        System.out.println("euklid(" + a + ", " + b +") starter!");
+        int r = a % b;
+        int sum = euklidUtskrift(b, r);
+        System.out.println("euklid(" + a + ", " + b +") ferdig!");
+        return sum;
+    }
+
+    public static int sum(int n){
+        if (n == 1){
+            return 1;
+        }
+        return sum(n-1) + n;
+    }
+
+    public static int sum(int[] a, int n){
+        if (n == 1){
+            return a[0];
+        }
+        return sum(a,n-1) + a[n-1];
+    }
+
+    public static int sum(int[] a, int v, int h){
+        if (v == h){
+            return a[v];
+        }
+        int m = (v + h)/2;
+        return sum(a,v,m) + sum(a,m+1,h);
+    }
+
+    public static int fib(int n){
+        if (n <= 1){
+            return n;
+        }else {
+            return fib(n-1) + fib(n-2);
+        }
+    }
+
+    public static int fibUtskrivt(int n) {
+        System.out.println("fib(" + n + ") starter!");
+        int fib = n > 1 ? fibUtskrivt(n - 1) + fibUtskrivt(n - 2) : n;
+        System.out.println("fib(" + n + ") er ferdig!");
+        return fib;
+    }
+
+    public static int sumkvadrattall(int n){
+        if (n == 0){
+            return 0;
+        }
+        return sumkvadrattall(n-1) + (int) Math.pow(n,2);
+    }
+
+    public static int sum(int k, int n){
+        if (k > n){
+            return -1;
+        } else if (k == n){
+            return k;
+        }
+        int m = (k + n)/2;
+        return sum(k, m) + sum(m+1, n);
+
+    }
+
+    public static int storst(int[] a, int index){
+        if (index > 0) {
+            return Math.max(a[index], storst(a, index-1));
+        } else {
+            return a[0];
+        }
+    }
+
+    public static long fak(int a){
+        if(a <= 1) {
+            return 1;
+        }
+
+        return a * fak(a-1);
+    }
+
+    public static void kvikksortering0(int[] a, int v, int h){
+        if (v == h){
+            return;
+        }
+        System.out.println("Kallet med [" + v + ":" + h + "] starter!");
+        int k = sParter0(a, v, h,(v + h)/2);
+        System.out.println("Kallet med [" + v + ":" + h + "] er ferdig!");
+    }
+
+    private static int parter0(int[] a, int v, int h, int skilleverdi) {
+        while (true) {                                  // stopper når v >= h
+            while (v <= h && a[v] < skilleverdi) v++;   // h er stoppverdi for v
+            while (v <= h && a[h] >= skilleverdi) h--;  // v er stoppverdi for h
+
+            if (v < h){
+                bytt(a,v++,h--);                        // bytter om a[v] og a[h]
+            }
+            else{
+                return v;                               // partisjoneringen er ferdig
+            }
+        }
+    }
+
+    private static int sParter0(int[] a, int v, int h, int indeks)
+    {
+        bytt(a, indeks, h);         // skilleverdi a[indeks] flyttes bakerst
+        int pos = parter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h ? 1]
+        bytt(a, pos, h);              // bytter for å få skilleverdien på rett plass
+        return pos;                   // returnerer posisjonen til skilleverdien
+    }
+
 }
