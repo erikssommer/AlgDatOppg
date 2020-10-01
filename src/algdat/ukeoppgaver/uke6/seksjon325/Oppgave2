@@ -1,0 +1,1 @@
+Sørget for at variabelen endringer økes i alle mutatorene, dvs. i leggInn-metodene, i fjern-metodene, i metodene oppdater() og nullstill().
