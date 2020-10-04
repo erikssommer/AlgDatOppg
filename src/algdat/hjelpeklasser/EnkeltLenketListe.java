@@ -6,16 +6,16 @@ import java.util.Objects;
 
 public class EnkeltLenketListe<T> implements Liste<T> {
 
-    private static final class Node<T>{
+    private static final class Node<T> {
         private T verdi;
         private Node<T> neste;
 
-        private Node(T verdi, Node<T> neste){
+        private Node(T verdi, Node<T> neste) {
             this.verdi = verdi;
             this.neste = neste;
         }
 
-        private Node(T verdi){
+        private Node(T verdi) {
             this.verdi = verdi;
             neste = null;
         }
@@ -25,13 +25,21 @@ public class EnkeltLenketListe<T> implements Liste<T> {
     private Node<T> hale;
     private int antall;
 
-    public EnkeltLenketListe(T[] a){
+    private Node<T> finnNode(int indeks) {
+        Node<T> p = hode;
+        for (int i = 0; i < indeks; i++) {
+            p = p.neste;
+        }
+        return p;
+    }
+
+    public EnkeltLenketListe(T[] a) {
         this();
 
         hode = hale = new Node<>(null); //Midlertidig
 
-        for (T verdi : a){
-            if (verdi != null){
+        for (T verdi : a) {
+            if (verdi != null) {
                 hale = hale.neste = new Node<>(verdi);
                 antall++;
             }
@@ -40,7 +48,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         hode = (antall == 0) ? (hale = null) : hode.neste; //Fjerner den midlertidige noden
     }
 
-    public EnkeltLenketListe(){
+    public EnkeltLenketListe() {
         hode = null;
         hale = null;
         antall = 0;
@@ -50,9 +58,9 @@ public class EnkeltLenketListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier");
 
-        if (antall == 0){
+        if (antall == 0) {
             hode = hale = new Node<>(verdi, null);
-        }else {
+        } else {
             hale = hale.neste = new Node<>(verdi, null);
         }
         antall++;
@@ -64,16 +72,16 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier");
         indeksKontroll(indeks, true); //true: index = antall er lovlig
 
-        if (indeks == 0){
+        if (indeks == 0) {
             hode = new Node<>(verdi, hode);
-            if (antall == 0){
+            if (antall == 0) {
                 hale = hode;
             }
-        }else if (indeks == antall){
+        } else if (indeks == antall) {
             hale = hale.neste = new Node<>(verdi, null);
-        }else {
+        } else {
             Node<T> p = hode;
-            for (int i = 1; i < indeks; i++){
+            for (int i = 1; i < indeks; i++) {
                 p = p.neste;
             }
             p.neste = new Node<>(verdi, p.neste);
@@ -84,32 +92,105 @@ public class EnkeltLenketListe<T> implements Liste<T> {
 
     @Override
     public boolean inneholder(T verdi) {
-        return false;
+        return indeksTil(verdi) != -1;
     }
 
     @Override
     public T hent(int indeks) {
-        return null;
+        indeksKontroll(indeks, false);
+        return finnNode(indeks).verdi;
     }
 
     @Override
     public int indeksTil(T verdi) {
-        return 0;
+        if (verdi == null){
+            return -1;
+        }
+
+        Node<T> p = hode;
+        for (int i = 0; i < antall; i++){
+            if (p.verdi.equals(verdi)){
+                return i;
+            }
+            p = p.neste;
+        }
+        return -1;
     }
 
     @Override
     public T oppdater(int indeks, T verdi) {
-        return null;
+        Objects.requireNonNull(verdi, "Ikke tillatt med null-verdier");
+        indeksKontroll(indeks, false);
+
+        Node<T> p = finnNode(indeks);
+        T gammelVerdi = p.verdi;
+        p.verdi = verdi;
+
+        return gammelVerdi;
     }
 
     @Override
     public boolean fjern(T verdi) {
-        return false;
+        if (verdi == null){
+            return false;
+        }
+
+        Node<T> q = hode;
+        Node<T> p = null;
+
+        while (q != null){
+            if (q.verdi.equals(verdi)){
+                break;
+            }
+            p = q;
+            q = q.neste;
+        }
+
+        if (q == null){
+            return false;
+        }else if (q == hode){
+            hode = hode.neste;
+        }else {
+            p.neste = q.neste;
+        }
+
+        if (q == hale){
+            hale = p;
+        }
+
+        q.verdi = null;
+        q.neste = null;
+
+        antall--;
+        return true;
     }
 
     @Override
     public T fjern(int indeks) {
-        return null;
+        indeksKontroll(indeks, false);
+
+        T temp;
+        if (indeks == 0) {
+            temp = hode.verdi;
+            hode = hode.neste;
+
+            if (antall == 1) {
+                hale = null;
+            }
+        } else {
+            Node<T> p = finnNode(indeks - 1);
+            Node<T> q = p.neste;
+            temp = q.verdi;
+
+            if (q == hale) {
+                hale = p;
+            }
+
+            p.neste = q.neste;
+        }
+
+        antall--;
+        return temp;
     }
 
     @Override
@@ -143,7 +224,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder s = new StringBuilder();
 
         s.append('[');
