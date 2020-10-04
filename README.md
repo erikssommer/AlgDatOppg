@@ -1,4 +1,4 @@
-# AlgDatOppg
+# Algoritmer og datastrukturer / Algorithms and data structures in java
 
 Oversikt over temaene:
 
