@@ -1,4 +1,4 @@
-# Algoritmer og datastrukturer / Algorithms and data structures in java
+# Algoritmer og datastrukturer / Algorithms and data structures
 
 Oversikt over temaene:
 
