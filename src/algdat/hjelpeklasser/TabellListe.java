@@ -95,11 +95,18 @@ public class TabellListe<T> implements Liste<T> {
     }
 
     @Override
+    @SuppressWarnings("unchecked")
     public void nullstill() {
-        for (int i = antall-1; i >= 0 ; i--){
-            fjern(i);
-            endringer++;
+        if (a.length > 10){
+            a = (T[])new Object[10];
+        } else {
+            for (int i = 0; i < antall; i++) {
+                a[i] = null;
+            }
         }
+
+        antall = 0;
+        endringer++;
     }
 
     @Override
