@@ -2,7 +2,10 @@ package algdat.hjelpeklasser;
 
 
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 import java.util.Objects;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
 public class EnkeltLenketListe<T> implements Liste<T> {
 
@@ -21,9 +24,80 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         }
     }
 
+    private class EnkeltLenketListeIterator implements Iterator<T>{
+        private Node<T> p = hode;
+        private boolean fjernOK = false;
+        private int iteratorendringer = endringer;
+
+        @Override
+        public boolean hasNext() {
+            return p != null;
+        }
+
+        @Override
+        public T next() {
+            if (!hasNext()){
+                throw new NoSuchElementException("Ingen verdier!");
+            }
+
+            fjernOK = true;
+            T denneVerdi = p.verdi;
+            p = p.neste;
+
+            return denneVerdi;
+        }
+
+        @Override
+        public void remove() {
+            if (!fjernOK){
+                throw new IllegalStateException("Ulovlig tilstand");
+            }
+            fjernOK = false;
+            Node<T> q = hode;
+
+            if (hode.neste == p){
+                hode = hode.neste;
+
+                if (p == null){
+                    hale = null;
+                }
+            }else {
+                Node<T> r = hode;
+
+                while (r.neste.neste != p){
+                    r = r.neste;
+                }
+
+                q = r.neste;
+                r.neste = p;
+
+                if (p == null){
+                    hale = r;
+                }
+
+                q.verdi = null;
+                q.neste = null;
+                endringer++;
+                iteratorendringer++;
+                antall--;
+            }
+        }
+
+        @Override
+        public void forEachRemaining(Consumer<? super T> handling) {
+            Objects.requireNonNull(handling, "handling er null!");
+
+            while (p != null) {
+                handling.accept(p.verdi);
+                p = p.neste;
+            }
+        }
+    }
+
     private Node<T> hode;
     private Node<T> hale;
     private int antall;
+    private int endringer;
 
     private Node<T> finnNode(int indeks) {
         Node<T> p = hode;
@@ -52,6 +126,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         hode = null;
         hale = null;
         antall = 0;
+        endringer = 0;
     }
 
     @Override
@@ -64,6 +139,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
             hale = hale.neste = new Node<>(verdi, null);
         }
         antall++;
+        endringer++;
         return true;
     }
 
@@ -86,7 +162,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
             }
             p.neste = new Node<>(verdi, p.neste);
         }
-
+        endringer++;
         antall++;
     }
 
@@ -126,6 +202,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         T gammelVerdi = p.verdi;
         p.verdi = verdi;
 
+        endringer++;
         return gammelVerdi;
     }
 
@@ -162,6 +239,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         q.neste = null;
 
         antall--;
+        endringer++;
         return true;
     }
 
@@ -190,6 +268,7 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         }
 
         antall--;
+        endringer++;
         return temp;
     }
 
@@ -216,11 +295,58 @@ public class EnkeltLenketListe<T> implements Liste<T> {
 
         hode = hale = null;
         antall = 0;
+        endringer++;
+    }
+
+    @Override
+    public void forEach(Consumer<? super T> handling) {
+        Objects.requireNonNull(handling, "Handling er null!");
+
+        Node<T> p = hode;
+        while (p != null) {
+            handling.accept(p.verdi);
+            p = p.neste;
+        }
+    }
+
+    @Override
+    public boolean fjernHvis(Predicate<? super T> predikat) {
+        Objects.requireNonNull(predikat, "null-predikat!");
+
+        Node<T> p = hode, q = null;
+        int antallFjernet = 0;
+
+        while (p != null) {
+            if (predikat.test(p.verdi)) {
+                antallFjernet++;
+
+                if (p == hode) {
+                    if (p == hale) hale = null;
+                    hode = hode.neste;
+                }
+                else if (p == hale){
+                    q.neste = null;
+                }
+                else{
+                    q.neste = p.neste;
+                }
+            }
+            q = p;
+            p = p.neste;
+        }
+
+        if (antallFjernet > 0) {
+            endringer++;
+        }
+
+        antall -= antallFjernet;
+
+        return antallFjernet > 0;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new EnkeltLenketListeIterator();
     }
 
     @Override
