@@ -1,0 +1,8 @@
+Hva ligger øverst på stakken A etter at flg. kode er utført:
+A.leggInn(2);
+A.leggInn(5);
+A.leggInn(1);
+A.kikk();
+A.taUt()
+
+5 ligger øverst
