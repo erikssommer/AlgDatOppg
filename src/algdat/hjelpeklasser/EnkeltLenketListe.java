@@ -1,13 +1,14 @@
 package algdat.hjelpeklasser;
 
 
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 import java.util.Objects;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
-public class EnkeltLenketListe<T> implements Liste<T> {
+public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
     private static final class Node<T> {
         private T verdi;
@@ -141,6 +142,18 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         antall++;
         endringer++;
         return true;
+    }
+
+    @Override
+    public T kikk() {
+        if (tom()) throw new NoSuchElementException("Køen er tom");
+        return hent(0);
+    }
+
+    @Override
+    public T taUt() {
+        if (tom()) throw new NoSuchElementException("Køen er tom!");
+        return fjern(0);
     }
 
     @Override
@@ -370,5 +383,39 @@ public class EnkeltLenketListe<T> implements Liste<T> {
         s.append(']');
 
         return s.toString();
+    }
+    //Trenger forbedringer. Funker ikke helt som den skal
+    public static <T> void sorter(Ko<T> ko, Stakk<T> stakk, Comparator<? super T> c){
+        kopier(ko, stakk);
+
+        while (!stakk.tom()){
+            T temp = stakk.kikk();
+            stakk.taUt();
+
+            while (!ko.tom() && c.compare(ko.kikk(), temp) < 0){
+                stakk.leggInn(ko.kikk());
+                ko.taUt();
+            }
+            ko.leggInn(temp);
+        }
+    }
+
+    public static <T> void kopier(Ko<T> A, Stakk<T> B){
+        if (!B.tom()){
+            throw new IllegalArgumentException("Stakk B må være tom!");
+        }
+
+        TabellStakk<T> C = new TabellStakk<>(A.antall());
+        T temp;
+
+        while (A.antall() > 0){
+            temp = A.taUt();
+            C.leggInn(temp);
+        }
+
+        while (C.antall() > 0){
+            temp = C.taUt();
+            B.leggInn(temp);
+        }
     }
 }
