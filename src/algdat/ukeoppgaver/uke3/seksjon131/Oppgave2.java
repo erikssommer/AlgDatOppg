@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke3.seksjon131;
 
-import algdat.Tabell;
+import algdat.hjelpeklasser.Tabell;
 
 import java.util.Arrays;
 

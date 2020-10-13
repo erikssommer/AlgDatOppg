@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke4.seksjon148;
 
-import algdat.Tabell;
+import algdat.hjelpeklasser.Tabell;
 import algdat.eksempelklasser.Komparator;
 
 import java.util.Arrays;

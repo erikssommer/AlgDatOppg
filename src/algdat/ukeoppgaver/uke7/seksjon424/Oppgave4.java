@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke7.seksjon424;
 
-import algdat.Tabell;
+import algdat.hjelpeklasser.Tabell;
 import algdat.hjelpeklasser.EnkeltLenketListe;
 import algdat.hjelpeklasser.Ko;
 import algdat.hjelpeklasser.Stakk;

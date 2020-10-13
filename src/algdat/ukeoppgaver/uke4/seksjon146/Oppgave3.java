@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke4.seksjon146;
 
-import algdat.Tabell;
+import algdat.hjelpeklasser.Tabell;
 import algdat.eksempelklasser.Person;
 import algdat.eksempelklasser.Student;
 import algdat.eksempelklasser.Studium;

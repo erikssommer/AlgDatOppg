@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke4.seksjon146;
 
-import algdat.Tabell;
+import algdat.hjelpeklasser.Tabell;
 
 public class Oppgave4 {
     public static void main(String[] args) {

@@ -1,4 +1,4 @@
-package algdat;
+package algdat.hjelpeklasser;
 
 import algdat.eksempelklasser.Komparator;
 
