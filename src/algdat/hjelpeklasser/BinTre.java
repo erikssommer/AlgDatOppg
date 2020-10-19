@@ -184,4 +184,26 @@ public class BinTre<T> {
         return Arrays.copyOf(a,niva);
     }
 
+    private static <T> void preorden(Node<T> p, Oppgave<? super T> oppgave){
+        if (p != null){
+            oppgave.utforOppgave(p.verdi);
+            preorden(p.venstre, oppgave);
+            preorden(p.hoyre, oppgave);
+        }
+    }
+
+    public void preorden(Oppgave<? super T> oppgave){
+        preorden(rot, oppgave);
+    }
+
+    private static <T> void inorden(Node<T> p, Oppgave<? super T> oppgave){
+        if (p.venstre != null) inorden(p.venstre, oppgave);
+        oppgave.utforOppgave(p.verdi);
+        if (p.hoyre != null) inorden(p.hoyre, oppgave);
+    }
+
+    public void inorden(Oppgave<? super T> oppgave){
+        if (!tom()) inorden(rot, oppgave);
+    }
+
 }
