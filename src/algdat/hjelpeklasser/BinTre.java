@@ -126,5 +126,19 @@ public class BinTre<T> {
         return p.verdi;
     }
 
+    public void nivaOrden(){
+        if (tom()) return;
+
+        Ko<Node<T>> ko = new TabellKo<>();
+        ko.leggInn(rot);
+
+        while (!ko.tom()){
+            Node<T> p = ko.taUt();
+            System.out.print(p.verdi + " ");
+
+            if (p.venstre != null) ko.leggInn(p.venstre);
+            if (p.hoyre != null) ko.leggInn(p.hoyre);
+        }
+    }
 
 }
