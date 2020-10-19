@@ -126,6 +126,7 @@ public class BinTre<T> {
         return p.verdi;
     }
 
+    //Bredde forst
     public void nivaOrden(){
         if (tom()) return;
 
@@ -135,6 +136,21 @@ public class BinTre<T> {
         while (!ko.tom()){
             Node<T> p = ko.taUt();
             System.out.print(p.verdi + " ");
+
+            if (p.venstre != null) ko.leggInn(p.venstre);
+            if (p.hoyre != null) ko.leggInn(p.hoyre);
+        }
+    }
+
+    public void nivaOrden(Oppgave<? super T> oppgave){
+        if (tom()) return;
+
+        Ko<Node<T>> ko = new TabellKo<>();
+        ko.leggInn(rot);
+
+        while (!ko.tom()){
+            Node<T> p = ko.taUt();
+            oppgave.utforOppgave(p.verdi);
 
             if (p.venstre != null) ko.leggInn(p.venstre);
             if (p.hoyre != null) ko.leggInn(p.hoyre);
