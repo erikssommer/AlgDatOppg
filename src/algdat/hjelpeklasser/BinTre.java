@@ -2,7 +2,10 @@ package algdat.hjelpeklasser;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.NoSuchElementException;
+import java.util.StringJoiner;
 import java.util.function.Consumer;
+import java.util.function.ObjIntConsumer;
 
 public class BinTre<T> {
     private static final class Node<T>{
@@ -206,4 +209,61 @@ public class BinTre<T> {
         if (!tom()) inorden(rot, oppgave);
     }
 
+    public T forstInorden(){
+        if (tom()) throw new NoSuchElementException("Treet er tomt!");
+
+        Node<T> p = rot;
+        while (p.venstre != null) p = p.venstre;
+
+        return p.verdi;
+    }
+
+    public T forstPostorden(){
+        if (tom()) throw new NoSuchElementException("Treet er tomt");
+
+        Node<T> p = rot;
+        while (true){
+            if (p.venstre != null) p = p.venstre;
+            else if (p.hoyre != null) p = p.hoyre;
+            else return p.verdi;
+        }
+    }
+
+    private static <T> Node<T> trePreorden(T[] preorden, int rot, T[] inorden, int v, int h){
+        if (v > h) return null;
+        int k = v;
+        T verdi = preorden[rot];
+
+        while (!verdi.equals(inorden[k])) k++;
+
+        Node<T> venstre = trePreorden(preorden,rot+1, inorden, v, k-1);
+        Node<T> hoyre = trePreorden(preorden, rot+1+k-v, inorden, k+1,h);
+
+        return new Node<>(verdi, venstre, hoyre);
+    }
+
+    public static <T> BinTre<T> trePreorden(T[] preorden, T[] inorden){
+        BinTre<T> tre = new BinTre<>();
+        tre.rot = trePreorden(preorden, 0, inorden, 0, inorden.length-1);
+
+        tre.antall = preorden.length;
+        return tre;
+    }
+
+    private static <T> void preorden(Node<T> p, int k, ObjIntConsumer<? super T> oppgave) {
+        oppgave.accept(p.verdi, k);
+        if (p.venstre != null) preorden(p.venstre, 2*k, oppgave);
+        if (p.hoyre != null) preorden(p.hoyre, 2*k + 1, oppgave);
+    }
+
+    public void preorden(ObjIntConsumer<? super T> oppgave) {
+        if (!tom()) preorden(rot, 1, oppgave);
+    }
+
+    @Override
+    public String toString() {
+        StringJoiner sj = new StringJoiner(", ", "[", "]");
+        if (!tom()) inorden(x -> sj.add(x != null ? x.toString() : "null"));
+        return sj.toString();
+    }
 }
