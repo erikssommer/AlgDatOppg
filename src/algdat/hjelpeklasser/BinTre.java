@@ -1,5 +1,9 @@
 package algdat.hjelpeklasser;
 
+import java.lang.reflect.Array;
+import java.util.Arrays;
+import java.util.function.Consumer;
+
 public class BinTre<T> {
     private static final class Node<T>{
         private T verdi;
@@ -155,6 +159,29 @@ public class BinTre<T> {
             if (p.venstre != null) ko.leggInn(p.venstre);
             if (p.hoyre != null) ko.leggInn(p.hoyre);
         }
+    }
+
+    public int[] nivaer(){
+        if (tom()) return new int[0];
+
+        int[] a = new int[8]; //Hjelpetabell
+        Ko<Node<T>> ko = new TabellKo<>();
+        int niva = 0;
+
+        ko.leggInn(rot);
+
+        while (!ko.tom()){
+            if (niva == a.length) a = Arrays.copyOf(a,2*niva);
+            int k = a[niva] = ko.antall();
+
+            for (int i = 0; i < k; i++){
+                Node<T> p = ko.taUt();
+                if (p.venstre != null) ko.leggInn(p.venstre);
+                if (p.hoyre != null) ko.leggInn(p.hoyre);
+            }
+            niva++;
+        }
+        return Arrays.copyOf(a,niva);
     }
 
 }
