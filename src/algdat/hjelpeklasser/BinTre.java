@@ -97,4 +97,34 @@ public class BinTre<T> {
         return antall == 0;
     }
 
+    public int nodetype(int posisjon){
+        return 1;
+    }
+
+    public T fjern(int posisjon){
+        if (posisjon < 1) throw new IllegalArgumentException("Posisjon k(" + posisjon + ") < 1!");
+
+        Node<T> p = rot, q = null;
+        int n = Integer.highestOneBit(posisjon >> 1);
+
+        while (p != null && n > 0) {
+            q = p;
+            p = (n & posisjon) == 0 ? p.venstre : p.hoyre;
+            n >>= 1;
+        }
+
+        if (p == null) throw new IllegalArgumentException("Posisjon k(" + posisjon + ") er utenfor treet!");
+
+        if (p.venstre != null || p.hoyre != null) throw new
+                IllegalArgumentException("Posisjon k(" + posisjon + ") er ingen bladnode!");
+
+        if (p == rot) rot = null;
+        else if (p == q.venstre) q.venstre = null;
+        else q.hoyre = null;
+
+        antall--;
+        return p.verdi;
+    }
+
+
 }
