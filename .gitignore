@@ -1,7 +1,5 @@
 # Compiled class file
 *.class
-*~
-*.swp
 
 # Log file
 *.log
