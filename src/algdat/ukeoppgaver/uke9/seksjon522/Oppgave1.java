@@ -1,4 +1,4 @@
-package algdat.ukeoppgaver.uke9.seksjon521;
+package algdat.ukeoppgaver.uke9.seksjon522;
 
 import algdat.hjelpeklasser.SBinTre;
 
