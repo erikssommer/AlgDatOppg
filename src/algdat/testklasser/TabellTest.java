@@ -11,6 +11,12 @@ class TabellTest {
 
     @org.junit.jupiter.api.Test
     void bytt() {
+        int[] liste = {3,4};
+
+        Tabell.bytt(liste, 0, 1);
+
+        assertEquals("[4, 3]", Arrays.toString(liste));
+
     }
 
     @org.junit.jupiter.api.Test
