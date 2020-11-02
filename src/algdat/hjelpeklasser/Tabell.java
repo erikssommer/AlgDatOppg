@@ -109,6 +109,30 @@ public class Tabell {
         System.out.println();
     }
 
+    public static void sort(int[] liste){
+        for (int i = 0; i < liste.length; i++){
+            for (int j = i+1; j < liste.length; j++){
+                if (liste[i] > liste[j]){
+                    int tmp = liste[i];
+                    liste[i] = liste[j];
+                    liste[j] = tmp;
+                }
+            }
+        }
+    }
+
+    public static <T extends Comparable<? super T>> void sort(T[] liste){
+        for (int i = 0; i < liste.length; i++){
+            for (int j = i+1; j < liste.length; j++){
+                if (liste[i].compareTo(liste[j]) > 0){
+                    T tmp = liste[i];
+                    liste[i] = liste[j];
+                    liste[j] = tmp;
+                }
+            }
+        }
+    }
+
     public static void fratilKontroll(int tabellengde, int fra, int til) {
 
         if (tabellengde == 0) {

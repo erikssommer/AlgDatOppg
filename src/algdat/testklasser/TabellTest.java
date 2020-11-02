@@ -2,6 +2,7 @@ package algdat.testklasser;
 
 import algdat.hjelpeklasser.Tabell;
 
+import java.util.Arrays;
 import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -14,6 +15,19 @@ class TabellTest {
 
     @org.junit.jupiter.api.Test
     void randPerm() {
+    }
+
+    @org.junit.jupiter.api.Test
+    void sort() {
+        int[] liste1 = {76,3,2,7,32,4,2,7,8,3};
+        Tabell.sort(liste1);
+
+        assertEquals("[2, 2, 3, 3, 4, 7, 7, 8, 32, 76]", Arrays.toString(liste1));
+
+        Integer[] liste2 = {76,3,2,7,32,4,2,7,8,3};
+        Tabell.sort(liste2);
+
+        assertEquals("[2, 2, 3, 3, 4, 7, 7, 8, 32, 76]", Arrays.toString(liste2));
     }
 
     @org.junit.jupiter.api.Test
