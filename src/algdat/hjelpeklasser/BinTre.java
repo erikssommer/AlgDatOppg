@@ -2,6 +2,7 @@ package algdat.hjelpeklasser;
 
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.StringJoiner;
 import java.util.function.Consumer;
@@ -185,6 +186,23 @@ public class BinTre<T> {
             niva++;
         }
         return Arrays.copyOf(a,niva);
+    }
+
+    public boolean erMindre(Comparator<? super T> c){
+        if (rot == null) return true;
+        else return erMindre(rot, c);
+    }
+
+    public static <T> boolean erMindre(Node<T> p, Comparator<? super T> c){
+        if (p.venstre != null){
+            if (c.compare(p.venstre.verdi, p.verdi) < 0) return false;
+            if (!erMindre(p.venstre, c)) return false;
+        }
+        if (p.hoyre != null){
+            if (c.compare(p.hoyre.verdi, p.verdi) < 0) return false;
+            return erMindre(p.hoyre, c);
+        }
+        return true;
     }
 
     private static <T> void preorden(Node<T> p, Oppgave<? super T> oppgave){
