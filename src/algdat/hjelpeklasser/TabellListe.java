@@ -9,7 +9,7 @@ public class TabellListe<T> implements Liste<T> {
     private int antall;
     private int endringer;
 
-    private class TabellListeIterator implements Iterator<T>{
+    private class TabellListeIterator implements Iterator<T> {
         private int denne = 0;
         private boolean fjernOK = false;
         private int iteratorendringer = endringer;
@@ -21,11 +21,11 @@ public class TabellListe<T> implements Liste<T> {
 
         @Override
         public T next() {
-            if (iteratorendringer != endringer){
+            if (iteratorendringer != endringer) {
                 throw new ConcurrentModificationException("Listen er endret!");
             }
 
-            if (!hasNext()){
+            if (!hasNext()) {
                 throw new NoSuchElementException("Tomt eller ingen verdier igjen!");
             }
 
@@ -38,11 +38,11 @@ public class TabellListe<T> implements Liste<T> {
 
         @Override
         public void remove() {
-            if (iteratorendringer != endringer){
+            if (iteratorendringer != endringer) {
                 throw new ConcurrentModificationException("Listen er endret!");
             }
 
-            if (!fjernOK){
+            if (!fjernOK) {
                 throw new IllegalStateException("Ulovlig tilstand!");
             }
 
@@ -50,7 +50,7 @@ public class TabellListe<T> implements Liste<T> {
             antall--;
             denne--;
 
-            System.arraycopy(a, denne+1,a, denne, antall - denne);
+            System.arraycopy(a, denne + 1, a, denne, antall - denne);
             a[antall] = null;
 
             endringer++;
@@ -60,7 +60,7 @@ public class TabellListe<T> implements Liste<T> {
         @Override
         public void forEachRemaining(Consumer<? super T> action) {
             Objects.requireNonNull(action);
-            while (hasNext()){
+            while (hasNext()) {
                 action.accept(next());
             }
         }
@@ -86,19 +86,19 @@ public class TabellListe<T> implements Liste<T> {
         }
     }
 
-    public int antall(){
+    public int antall() {
         return antall;
     }
 
-    public boolean tom(){
+    public boolean tom() {
         return antall == 0;
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public void nullstill() {
-        if (a.length > 10){
-            a = (T[])new Object[10];
+        if (a.length > 10) {
+            a = (T[]) new Object[10];
         } else {
             for (int i = 0; i < antall; i++) {
                 a[i] = null;
@@ -114,14 +114,14 @@ public class TabellListe<T> implements Liste<T> {
         return new TabellListeIterator();
     }
 
-    public T hent(int index){
+    public T hent(int index) {
         indeksKontroll(index, false); // false: indeks = antall er ulovlig
         return a[index];
     }
 
-    public int indeksTil(T verdi){
-        for (int i = 0; i < antall; i++){
-            if (a[i].equals(verdi)){
+    public int indeksTil(T verdi) {
+        for (int i = 0; i < antall; i++) {
+            if (a[i].equals(verdi)) {
                 return i; //Funnet
             }
         }
@@ -143,8 +143,8 @@ public class TabellListe<T> implements Liste<T> {
     public boolean fjern(T verdi) {
         Objects.requireNonNull(verdi, "null er ulovlig");
 
-        for (int i = 0; i < a.length; i++){
-            if (a[i].equals(verdi)){
+        for (int i = 0; i < a.length; i++) {
+            if (a[i].equals(verdi)) {
                 fjern(i);
                 endringer++;
                 return true;
@@ -159,7 +159,7 @@ public class TabellListe<T> implements Liste<T> {
         T verdi = a[indeks];
 
         antall--;
-        System.arraycopy(a, indeks+1, a, indeks, antall-indeks);
+        System.arraycopy(a, indeks + 1, a, indeks, antall - indeks);
         a[antall] = null;
         endringer++;
 
@@ -193,8 +193,8 @@ public class TabellListe<T> implements Liste<T> {
     public boolean leggInn(T verdi) {
         Objects.requireNonNull(verdi);
 
-        if (antall == a.length){
-            a = Arrays.copyOf(a, (3*antall)/2+1);
+        if (antall == a.length) {
+            a = Arrays.copyOf(a, (3 * antall) / 2 + 1);
         }
 
         a[antall++] = verdi;
@@ -208,37 +208,37 @@ public class TabellListe<T> implements Liste<T> {
 
         indeksKontroll(indeks, true); // true: indeks = antall er lovlig
 
-        if (antall == a.length){
-            a = Arrays.copyOf(a, (3*antall)/2 +1);
+        if (antall == a.length) {
+            a = Arrays.copyOf(a, (3 * antall) / 2 + 1);
         }
 
-        System.arraycopy(a, indeks, a, indeks+1, antall-indeks);
+        System.arraycopy(a, indeks, a, indeks + 1, antall - indeks);
 
         a[indeks] = verdi;
         antall++;
         endringer++;
     }
 
-    public boolean inneholder(T verdi){
+    public boolean inneholder(T verdi) {
         return indeksTil(verdi) != -1;
     }
 
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
 
-        if (antall == 0){
+        if (antall == 0) {
             return sb.append("[]").toString();
-        } else if (antall == 1){
+        } else if (antall == 1) {
             return sb.append("[").append(a[0]).append("]").toString();
         }
 
         sb.append("[");
 
-        for (int i = 0; i < a.length-1; i++){
+        for (int i = 0; i < a.length - 1; i++) {
             sb.append(a[i]).append(", ");
         }
 
-        return sb.append(a[a.length-1]).append("]").toString();
+        return sb.append(a[a.length - 1]).append("]").toString();
     }
 
 }

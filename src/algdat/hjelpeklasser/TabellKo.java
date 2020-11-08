@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 import java.util.Stack;
 import java.util.StringJoiner;
 
-public class TabellKo<T> implements Ko<T>{
+public class TabellKo<T> implements Ko<T> {
 
     private T[] a;
     private int fra;
@@ -12,7 +12,7 @@ public class TabellKo<T> implements Ko<T>{
 
     @SuppressWarnings("unchecked")
     public TabellKo(int lengde) {
-        if (lengde < 1){
+        if (lengde < 1) {
             throw new IllegalArgumentException("Må ha positiv lengde");
         }
 
@@ -20,7 +20,7 @@ public class TabellKo<T> implements Ko<T>{
         fra = til = 0;
     }
 
-    public TabellKo(){
+    public TabellKo() {
         this(8);
     }
 
@@ -28,20 +28,20 @@ public class TabellKo<T> implements Ko<T>{
     public boolean leggInn(T verdi) {
         a[til] = verdi;
         til++;
-        if (til == a.length){
+        if (til == a.length) {
             til = 0;
         }
-        if (fra == til){
-            a = utvidTabell(2*a.length);
+        if (fra == til) {
+            a = utvidTabell(2 * a.length);
         }
         return true;
     }
 
     @SuppressWarnings("unchecked")
-    private T[] utvidTabell(int lengde){
+    private T[] utvidTabell(int lengde) {
         T[] b = (T[]) new Object[lengde];
         System.arraycopy(a, fra, b, 0, a.length - fra);
-        System.arraycopy(a,0,b,a.length - fra, fra);
+        System.arraycopy(a, 0, b, a.length - fra, fra);
         fra = 0;
         til = a.length;
         return b;
@@ -54,13 +54,13 @@ public class TabellKo<T> implements Ko<T>{
 
     @Override
     public T taUt() {
-        if (fra == til){
+        if (fra == til) {
             throw new NoSuchElementException("Køen er tom");
         }
         T temp = a[fra];
         a[fra] = null;
         fra++;
-        if (fra == a.length){
+        if (fra == a.length) {
             fra = 0;
         }
         return temp;
@@ -78,33 +78,33 @@ public class TabellKo<T> implements Ko<T>{
 
     @Override
     public void nullstill() {
-        while (fra != til){
+        while (fra != til) {
             a[fra++] = null;
-            if (fra == a.length){
+            if (fra == a.length) {
                 fra = 0;
             }
         }
     }
 
-    public int indeksTil(T verdi){
-        for (int i = fra; i < til; i++){
-            if (a[i] == verdi){
+    public int indeksTil(T verdi) {
+        for (int i = fra; i < til; i++) {
+            if (a[i] == verdi) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static <T> void snu(Stakk<T> A){
+    public static <T> void snu(Stakk<T> A) {
 
     }
 
-    public static <T> void snu(Ko<T> A){
+    public static <T> void snu(Ko<T> A) {
 
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringJoiner s = new StringJoiner(", ", "[", "]");
 
         for (int i = fra, k = til; i != k; i = (i + 1) % a.length) {

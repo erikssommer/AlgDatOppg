@@ -109,10 +109,10 @@ public class Tabell {
         System.out.println();
     }
 
-    public static void sort(int[] liste){
-        for (int i = 0; i < liste.length; i++){
-            for (int j = i+1; j < liste.length; j++){
-                if (liste[i] > liste[j]){
+    public static void sort(int[] liste) {
+        for (int i = 0; i < liste.length; i++) {
+            for (int j = i + 1; j < liste.length; j++) {
+                if (liste[i] > liste[j]) {
                     int tmp = liste[i];
                     liste[i] = liste[j];
                     liste[j] = tmp;
@@ -121,10 +121,10 @@ public class Tabell {
         }
     }
 
-    public static <T extends Comparable<? super T>> void sort(T[] liste){
-        for (int i = 0; i < liste.length; i++){
-            for (int j = i+1; j < liste.length; j++){
-                if (liste[i].compareTo(liste[j]) > 0){
+    public static <T extends Comparable<? super T>> void sort(T[] liste) {
+        for (int i = 0; i < liste.length; i++) {
+            for (int j = i + 1; j < liste.length; j++) {
+                if (liste[i].compareTo(liste[j]) > 0) {
                     T tmp = liste[i];
                     liste[i] = liste[j];
                     liste[j] = tmp;
@@ -334,11 +334,11 @@ public class Tabell {
         }
     }
 
-    public static int inversjoner(int[] a){
+    public static int inversjoner(int[] a) {
         int antall = 0;
-        for (int i = 0; i < a.length-1; i++){
-            for (int j = i+1;j < a.length; j++){
-                if (a[i] > a[j]){
+        for (int i = 0; i < a.length - 1; i++) {
+            for (int j = i + 1; j < a.length; j++) {
+                if (a[i] > a[j]) {
                     antall++;
                 }
             }
@@ -346,20 +346,20 @@ public class Tabell {
         return antall;
     }
 
-    public static void utvalgssortering(int[] a){
-        for (int i = 0; i < a.length-1; i++){
-            bytt(a, i, min(a,i,a.length));
+    public static void utvalgssortering(int[] a) {
+        for (int i = 0; i < a.length - 1; i++) {
+            bytt(a, i, min(a, i, a.length));
         }
     }
 
-    public static void utvalgssortering(int[] a, int fra, int til){
+    public static void utvalgssortering(int[] a, int fra, int til) {
 
         fratilKontroll(a.length, fra, til);
 
         for (int i = fra; i < a.length - 1; i++) {
             int index = i;
-            for (int j = til + 1; j < a.length; j++){
-                if (a[j] < a[index]){
+            for (int j = til + 1; j < a.length; j++) {
+                if (a[j] < a[index]) {
                     index = j;
                 }
             }
@@ -370,11 +370,11 @@ public class Tabell {
     }
 
     //Hentet fra https://www.javatpoint.com/selection-sort-in-java
-    public static void selectionSort(int[] arr){
+    public static void selectionSort(int[] arr) {
         for (int i = 0; i < arr.length - 1; i++) {
             int index = i;
-            for (int j = i + 1; j < arr.length; j++){
-                if (arr[j] < arr[index]){
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[j] < arr[index]) {
                     index = j; //searching for lowest index
                 }
             }
@@ -384,48 +384,48 @@ public class Tabell {
         }
     }
 
-    public static int usortertsok(int[] a, int verdi){
-        for (int i = 0; i < a.length; i++){
-            if (a[i] == verdi){
+    public static int usortertsok(int[] a, int verdi) {
+        for (int i = 0; i < a.length; i++) {
+            if (a[i] == verdi) {
                 return i;
             }
         }
         return -1;
     }
 
-    public static int linearsok(int[] a, int verdi){
-        if (a.length == 0 || verdi > a[a.length-1]){
-            return -(a.length +1);
+    public static int linearsok(int[] a, int verdi) {
+        if (a.length == 0 || verdi > a[a.length - 1]) {
+            return -(a.length + 1);
         }
         int i = 0;
-        for ( ; a[i] < verdi; i++);
+        for (; a[i] < verdi; i++) ;
 
-        return verdi == a[i] ? i : -(i +1);
+        return verdi == a[i] ? i : -(i + 1);
     }
 
-    public static int linearsokReturSisteVerdi(int[] a, int verdi){
-        if (a.length == 0 || verdi > a[a.length-1]){
-            return -(a.length +1);
+    public static int linearsokReturSisteVerdi(int[] a, int verdi) {
+        if (a.length == 0 || verdi > a[a.length - 1]) {
+            return -(a.length + 1);
         }
-        int i = a.length-1;
-        for ( ; a[i] > verdi; i--);
+        int i = a.length - 1;
+        for (; a[i] > verdi; i--) ;
 
-        return verdi == a[i] ? i : -(i +1);
+        return verdi == a[i] ? i : -(i + 1);
     }
 
     //TODO denne trenger nok litt mer jobb
-    public static int linearsok(int[] a, int k, int verdi){
-        if (a.length == 0 || verdi > a[a.length-1]){
-            return -(a.length +1);
+    public static int linearsok(int[] a, int k, int verdi) {
+        if (a.length == 0 || verdi > a[a.length - 1]) {
+            return -(a.length + 1);
         }
-        if (k < 0){
+        if (k < 0) {
             throw new IllegalArgumentException("Hoppelengden kan ikke være negativ");
         }
 
-        for (int i = 0; i < i + k && i < a.length; i += k){
-            if (verdi < a[i]){
-                for (int j = i-k; j < i + k; j++){
-                    if (a[j] == verdi){
+        for (int i = 0; i < i + k && i < a.length; i += k) {
+            if (verdi < a[i]) {
+                for (int j = i - k; j < i + k; j++) {
+                    if (a[j] == verdi) {
                         return j;
                     }
                 }
@@ -434,17 +434,17 @@ public class Tabell {
         return -1;
     }
 
-    public static int kvadratrotsok(int[] a, int verdi){
+    public static int kvadratrotsok(int[] a, int verdi) {
         int k = (int) Math.sqrt(a.length);
-        if (verdi < a[k]){
-            for (int i = 0; i < k; i++){
-                if (verdi == a[i]){
+        if (verdi < a[k]) {
+            for (int i = 0; i < k; i++) {
+                if (verdi == a[i]) {
                     return i;
                 }
             }
-        }else {
-            for (int i = k; i < a.length; i++){
-                if (verdi == a[i]){
+        } else {
+            for (int i = k; i < a.length; i++) {
+                if (verdi == a[i]) {
                     return i;
                 }
             }
@@ -453,41 +453,41 @@ public class Tabell {
     }
 
     //Returnerer siste index
-    public static int binaersokV1(int[] a, int fra, int til, int verdi){
+    public static int binaersokV1(int[] a, int fra, int til, int verdi) {
         fratilKontroll(a.length, fra, til);
         int v = fra;
-        int h = til -1;
+        int h = til - 1;
 
-        while (v <= h){
-            int m = (v + h)/2;
+        while (v <= h) {
+            int m = (v + h) / 2;
             int midtverdi = a[m];
 
-            if (verdi == midtverdi){
+            if (verdi == midtverdi) {
                 return m;
-            }else if (verdi > midtverdi){
+            } else if (verdi > midtverdi) {
                 v = m + 1;
-            }else {
-                h = m -1;
+            } else {
+                h = m - 1;
             }
         }
         return -(v + 1);
     }
 
     //Returnerer siste index
-    public static int binaersokV2(int[] a, int fra, int til, int verdi){
+    public static int binaersokV2(int[] a, int fra, int til, int verdi) {
         fratilKontroll(a.length, fra, til);
         int v = fra;
-        int h = til -1;
+        int h = til - 1;
 
-        while (v <= h){
-            int m = (v + h)/2;
+        while (v <= h) {
+            int m = (v + h) / 2;
             int midtverdi = a[m];
 
-            if (verdi > midtverdi){
+            if (verdi > midtverdi) {
                 v = m + 1;
-            }else if (verdi < midtverdi){
+            } else if (verdi < midtverdi) {
                 h = m - 1;
-            }else {
+            } else {
                 return m;
             }
         }
@@ -495,68 +495,68 @@ public class Tabell {
     }
 
     //Returnerer første index
-    public static int binaersokV3(int[] a, int fra, int til, int verdi){
+    public static int binaersokV3(int[] a, int fra, int til, int verdi) {
         fratilKontroll(a.length, fra, til);
         int v = fra;
-        int h = til -1;
+        int h = til - 1;
 
-        while (v < h){
-            int m = (v + h)/2;
+        while (v < h) {
+            int m = (v + h) / 2;
 
-            if (verdi > a[m]){
+            if (verdi > a[m]) {
                 v = m + 1;
-            }else {
+            } else {
                 h = m;
             }
         }
 
-        if (h < v || verdi < a[v]){
+        if (h < v || verdi < a[v]) {
             return -(v + 1);
-        }else if (verdi == a[v]){
+        } else if (verdi == a[v]) {
             return v;
-        }else {
+        } else {
             return -(v + 2);
         }
     }
 
-    public static int binaersokV1(int[] a, int verdi){
+    public static int binaersokV1(int[] a, int verdi) {
         return binaersokV1(a, 0, a.length, verdi);
     }
 
-    public static int binaersokV2(int[] a, int verdi){
+    public static int binaersokV2(int[] a, int verdi) {
         return binaersokV2(a, 0, a.length, verdi);
     }
 
-    public static int binaersokV3(int[] a, int verdi){
+    public static int binaersokV3(int[] a, int verdi) {
         return binaersokV3(a, 0, a.length, verdi);
     }
 
-    public static void innsettingssortering(int[] a){
-        for (int i = 1; i < a.length; i++){
+    public static void innsettingssortering(int[] a) {
+        for (int i = 1; i < a.length; i++) {
             int verdi = a[i];
             int j = i - 1;
-            for (; j >= 0 && verdi < a[j]; j--){
-                a[j+1] = a[j];
+            for (; j >= 0 && verdi < a[j]; j--) {
+                a[j + 1] = a[j];
             }
-            a[j +1] = verdi;
+            a[j + 1] = verdi;
         }
     }
 
-    public static void innsettingssortering(int[] a, int fra, int til){
-        for (int i = fra; i <= til; i++){
+    public static void innsettingssortering(int[] a, int fra, int til) {
+        for (int i = fra; i <= til; i++) {
             int verdi = a[i];
             int j = i - 1;
-            for (; j >= fra && verdi < a[j]; j--){
-                a[j+1] = a[j];
+            for (; j >= fra && verdi < a[j]; j--) {
+                a[j + 1] = a[j];
             }
-            a[j +1] = verdi;
+            a[j + 1] = verdi;
         }
     }
 
-    public static void innsettingssorteringV2(int[] a){
-        for (int i = 1; i < a.length; i++){
+    public static void innsettingssorteringV2(int[] a) {
+        for (int i = 1; i < a.length; i++) {
             int temp = a[i];
-            for (int j = i - 1; j >= 0 && temp <a [j]; j--) {
+            for (int j = i - 1; j >= 0 && temp < a[j]; j--) {
                 Tabell.bytt(a, j, j + 1);
             }
         }
@@ -564,7 +564,7 @@ public class Tabell {
 
     public static void shell(int[] a, int k) {
         for (int i = k; i < a.length; i++) {
-            int temp= a[i];
+            int temp = a[i];
             int j = i - k;
             for (; j >= 0 && temp < a[j]; j -= k) {
                 a[j + k] = a[j];
@@ -573,21 +573,21 @@ public class Tabell {
         }
     }
 
-    public static boolean erSortert(int[] a){
-        for (int i = 1; i < a.length; i++){
-            if (a[i-1] > a[i]){
+    public static boolean erSortert(int[] a) {
+        for (int i = 1; i < a.length; i++) {
+            if (a[i - 1] > a[i]) {
                 return false;
             }
         }
         return true;
     }
 
-    public static int maks(double[] a){
+    public static int maks(double[] a) {
         int m = 0;
         double maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (a[i] > maksverdi){
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > maksverdi) {
                 maksverdi = a[m];
                 m = i;
             }
@@ -595,12 +595,12 @@ public class Tabell {
         return m;
     }
 
-    public static int maks(String[] a ){
+    public static int maks(String[] a) {
         int m = 0;
         String maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (a[i].compareTo(maksverdi) > 0){
+        for (int i = 1; i < a.length; i++) {
+            if (a[i].compareTo(maksverdi) > 0) {
                 maksverdi = a[m];
                 m = i;
             }
@@ -608,12 +608,12 @@ public class Tabell {
         return m;
     }
 
-    public static int maks(char[] a){
+    public static int maks(char[] a) {
         int m = 0;
         char maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (a[i] > maksverdi){
+        for (int i = 1; i < a.length; i++) {
+            if (a[i] > maksverdi) {
                 maksverdi = a[m];
                 m = i;
             }
@@ -621,12 +621,12 @@ public class Tabell {
         return m;
     }
 
-    public static int maks(Integer[] a){
+    public static int maks(Integer[] a) {
         int m = 0;
         Integer maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (a[i].compareTo(maksverdi) > 0){
+        for (int i = 1; i < a.length; i++) {
+            if (a[i].compareTo(maksverdi) > 0) {
                 maksverdi = a[m];
                 m = i;
             }
@@ -636,12 +636,12 @@ public class Tabell {
 
     //Generiske metoder (Start)
 
-    public static <T extends Comparable<? super T>> int maks(T[] a){
+    public static <T extends Comparable<? super T>> int maks(T[] a) {
         int m = 0;
         T maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (a[i].compareTo(maksverdi) > 0){
+        for (int i = 1; i < a.length; i++) {
+            if (a[i].compareTo(maksverdi) > 0) {
                 maksverdi = a[i];
                 m = i;
             }
@@ -649,73 +649,76 @@ public class Tabell {
         return m;
     }
 
-    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a){
-        for (int i = 1; i < a.length; i++){
+    public static <T extends Comparable<? super T>> void innsettingssortering(T[] a) {
+        for (int i = 1; i < a.length; i++) {
             T verdi = a[i];
             int j = i - 1;
-            for (; j >= 0 && verdi.compareTo(a[j]) < 0; j--){
-                a[j+1] = a[j];
+            for (; j >= 0 && verdi.compareTo(a[j]) < 0; j--) {
+                a[j + 1] = a[j];
             }
             a[j + 1] = verdi;
         }
     }
 
-    public static void skriv(Object[] a, int fra, int til){
-        for (int i = fra; i < til; i++){
+    public static void skriv(Object[] a, int fra, int til) {
+        for (int i = fra; i < til; i++) {
             System.out.print(a[i] + " ");
         }
         System.out.print(a[til]); //For å unngå mellomrom til slutt
     }
 
-    public static void skriv(Object[] a){
-        skriv(a, 0, a.length-1);
+    public static void skriv(Object[] a) {
+        skriv(a, 0, a.length - 1);
     }
 
-    public static void skrivln(Object[] a){
-        skriv(a, 0, a.length-1);
+    public static void skrivln(Object[] a) {
+        skriv(a, 0, a.length - 1);
         System.out.println(); //For ny linje
     }
 
-    public static void bytt(Object[] a, int i, int j){
+    public static void bytt(Object[] a, int i, int j) {
         Object temp = a[i];
         a[i] = a[j];
         a[j] = temp;
     }
 
-    public static Integer[] randPermInteger(int n){
+    public static Integer[] randPermInteger(int n) {
         Integer[] a = new Integer[n];
-        Arrays.setAll(a, i -> i +1);
+        Arrays.setAll(a, i -> i + 1);
 
         Random r = new Random();
 
-        for (int k = n - 1; k > 0; k--){
-            int i = r.nextInt(k+1);
-            bytt(a,k,i);
+        for (int k = n - 1; k > 0; k--) {
+            int i = r.nextInt(k + 1);
+            bytt(a, k, i);
         }
         return a;
     }
 
-    public static void f(int a, Integer b) { }
-    public static void f(Integer a, int b) { }
+    public static void f(int a, Integer b) {
+    }
 
-    public static <T> void innsettingssortering(T[] a, Komparator<? super T> c){
-        for (int i = 1; i < a.length; i++){
+    public static void f(Integer a, int b) {
+    }
+
+    public static <T> void innsettingssortering(T[] a, Komparator<? super T> c) {
+        for (int i = 1; i < a.length; i++) {
             T verdi = a[i];
-            int j = i -1;
+            int j = i - 1;
 
-            for (; j >= 0 && c.compare(verdi, a[j]) < 0; j--){
-                a[j+1] = a[j];
+            for (; j >= 0 && c.compare(verdi, a[j]) < 0; j--) {
+                a[j + 1] = a[j];
             }
-            a[j+1] = verdi;
+            a[j + 1] = verdi;
         }
     }
 
-    public static <T> int maks(T[] a, Komparator<? super T> c){
+    public static <T> int maks(T[] a, Komparator<? super T> c) {
         int m = 0;
         T maksverdi = a[m];
 
-        for (int i = 1; i < a.length; i++){
-            if (c.compare(a[i],maksverdi) > 0){
+        for (int i = 1; i < a.length; i++) {
+            if (c.compare(a[i], maksverdi) > 0) {
                 maksverdi = a[i];
                 m = i;
             }
@@ -743,7 +746,7 @@ public class Tabell {
 
     public static <T> void utvalgssortering(T[] a, Comparator<? super T> c) {
         for (int k = a.length; k > 1; k--) {
-            bytt(a,maks(a,0,k,c),k-1);
+            bytt(a, maks(a, 0, k, c), k - 1);
         }
     }
 
@@ -752,80 +755,80 @@ public class Tabell {
             return;
         }
 
-        int p = sParter(a,v,h,(v + h)/2,c);
-        kvikksortering(a,v,p-1,c);
-        kvikksortering(a,p+1,h,c);
+        int p = sParter(a, v, h, (v + h) / 2, c);
+        kvikksortering(a, v, p - 1, c);
+        kvikksortering(a, p + 1, h, c);
     }
 
     public static <T> void kvikksortering(T[] a, Comparator<? super T> c) {
-        kvikksortering(a,0,a.length-1,c);
+        kvikksortering(a, 0, a.length - 1, c);
     }
 
     public static <T> int parter(T[] a, int v, int h, T skilleverdi, Comparator<? super T> c) {
-        while (v <= h && c.compare(a[v],skilleverdi) < 0){
+        while (v <= h && c.compare(a[v], skilleverdi) < 0) {
             v++;
         }
-        while (v <= h && c.compare(skilleverdi,a[h]) <= 0){
+        while (v <= h && c.compare(skilleverdi, a[h]) <= 0) {
             h--;
         }
 
         while (true) {
             if (v < h) {
-                Tabell.bytt(a,v++,h--);
+                Tabell.bytt(a, v++, h--);
             } else {
                 return v;
             }
-            while (c.compare(a[v],skilleverdi) < 0) {
+            while (c.compare(a[v], skilleverdi) < 0) {
                 v++;
             }
-            while (c.compare(skilleverdi,a[h]) <= 0){
+            while (c.compare(skilleverdi, a[h]) <= 0) {
                 h--;
             }
         }
     }
 
     public static <T> int parter(T[] a, T skilleverdi, Comparator<? super T> c) {
-        return parter(a,0,a.length-1,skilleverdi,c);
+        return parter(a, 0, a.length - 1, skilleverdi, c);
     }
 
     public static <T> int sParter(T[] a, int v, int h, int k, Comparator<? super T> c) {
-        if (v < 0 || h >= a.length || k < v || k > h){
+        if (v < 0 || h >= a.length || k < v || k > h) {
             throw new IllegalArgumentException("Ulovlig parameterverdi");
         }
 
-        bytt(a,k,h);
-        int p = parter(a,v,h-1,a[h],c);
-        bytt(a,p,h);
+        bytt(a, k, h);
+        int p = parter(a, v, h - 1, a[h], c);
+        bytt(a, p, h);
 
         return p;
     }
 
     private static <T> void flett(T[] a, T[] b, int fra, int m, int til, Comparator<? super T> c) {
         int n = m - fra;
-        System.arraycopy(a,fra,b,0,n);
+        System.arraycopy(a, fra, b, 0, n);
 
         int i = 0, j = m, k = fra;
 
-        while (i < n && j < til){
-            a[k++] = c.compare(b[i],a[j]) < 0 ? b[i++] : a[j++];
+        while (i < n && j < til) {
+            a[k++] = c.compare(b[i], a[j]) < 0 ? b[i++] : a[j++];
         }
 
-        while (i < n){
+        while (i < n) {
             a[k++] = b[i++];
         }
     }
 
     private static <T> void flettesortering(T[] a, T[] b, int fra, int til, Comparator<? super T> c) {
-        if (til - fra <= 1){
+        if (til - fra <= 1) {
             return;
         }
 
-        int m = (fra + til)/2;
+        int m = (fra + til) / 2;
 
-        flettesortering(a,b,fra,m,c);
-        flettesortering(a,b,m,til,c);
+        flettesortering(a, b, fra, m, c);
+        flettesortering(a, b, m, til, c);
 
-        flett(a,b,fra,m,til,c);
+        flett(a, b, fra, m, til, c);
     }
 
     @SuppressWarnings("unchecked")
@@ -866,25 +869,25 @@ public class Tabell {
 
     // Metoder med rekursjon/rekursive metoder
 
-    public static int a(int n){
-        if (n == 0){
+    public static int a(int n) {
+        if (n == 0) {
             return 1;
-        } else if (n == 1){
+        } else if (n == 1) {
             return 2;
-        } else{
-            return 2*a(n-1) + 3* a(n-2);
+        } else {
+            return 2 * a(n - 1) + 3 * a(n - 2);
         }
     }
 
-    public static int tverrsum(int n){
-        if (n < 10){
+    public static int tverrsum(int n) {
+        if (n < 10) {
             return n;
-        }else {
-            return tverrsum(n/10) + (n%10);
+        } else {
+            return tverrsum(n / 10) + (n % 10);
         }
     }
 
-    public static int tverrsumURek(int n){
+    public static int tverrsumURek(int n) {
         int tall1, tall2, tall3;
 
         tall1 = n / 100;        // --> 7,51 = 7
@@ -901,60 +904,60 @@ public class Tabell {
         return sum;
     }
 
-    public static int sifferrot(int n){
-        if (n < 10){
+    public static int sifferrot(int n) {
+        if (n < 10) {
             return n;
-        }else {
-            return sifferrot(tverrsum(n/10) + (n%10));
+        } else {
+            return sifferrot(tverrsum(n / 10) + (n % 10));
         }
     }
 
-    public static int euklid(int a, int b){
-        if (b == 0){
+    public static int euklid(int a, int b) {
+        if (b == 0) {
             return a;
         }
         int r = a % b;
         return euklid(b, r);
     }
 
-    public static int euklidUtskrift(int a, int b){
-        if (b == 0){
+    public static int euklidUtskrift(int a, int b) {
+        if (b == 0) {
             return a;
         }
-        System.out.println("euklid(" + a + ", " + b +") starter!");
+        System.out.println("euklid(" + a + ", " + b + ") starter!");
         int r = a % b;
         int sum = euklidUtskrift(b, r);
-        System.out.println("euklid(" + a + ", " + b +") ferdig!");
+        System.out.println("euklid(" + a + ", " + b + ") ferdig!");
         return sum;
     }
 
-    public static int sum(int n){
-        if (n == 1){
+    public static int sum(int n) {
+        if (n == 1) {
             return 1;
         }
-        return sum(n-1) + n;
+        return sum(n - 1) + n;
     }
 
-    public static int sum(int[] a, int n){
-        if (n == 1){
+    public static int sum(int[] a, int n) {
+        if (n == 1) {
             return a[0];
         }
-        return sum(a,n-1) + a[n-1];
+        return sum(a, n - 1) + a[n - 1];
     }
 
-    public static int sum(int[] a, int v, int h){
-        if (v == h){
+    public static int sum(int[] a, int v, int h) {
+        if (v == h) {
             return a[v];
         }
-        int m = (v + h)/2;
-        return sum(a,v,m) + sum(a,m+1,h);
+        int m = (v + h) / 2;
+        return sum(a, v, m) + sum(a, m + 1, h);
     }
 
-    public static int fib(int n){
-        if (n <= 1){
+    public static int fib(int n) {
+        if (n <= 1) {
             return n;
-        }else {
-            return fib(n-1) + fib(n-2);
+        } else {
+            return fib(n - 1) + fib(n - 2);
         }
     }
 
@@ -965,46 +968,46 @@ public class Tabell {
         return fib;
     }
 
-    public static int sumkvadrattall(int n){
-        if (n == 0){
+    public static int sumkvadrattall(int n) {
+        if (n == 0) {
             return 0;
         }
-        return sumkvadrattall(n-1) + (int) Math.pow(n,2);
+        return sumkvadrattall(n - 1) + (int) Math.pow(n, 2);
     }
 
-    public static int sum(int k, int n){
-        if (k > n){
+    public static int sum(int k, int n) {
+        if (k > n) {
             return -1;
-        } else if (k == n){
+        } else if (k == n) {
             return k;
         }
-        int m = (k + n)/2;
-        return sum(k, m) + sum(m+1, n);
+        int m = (k + n) / 2;
+        return sum(k, m) + sum(m + 1, n);
 
     }
 
-    public static int storst(int[] a, int index){
+    public static int storst(int[] a, int index) {
         if (index > 0) {
-            return Math.max(a[index], storst(a, index-1));
+            return Math.max(a[index], storst(a, index - 1));
         } else {
             return a[0];
         }
     }
 
-    public static long fak(int a){
-        if(a <= 1) {
+    public static long fak(int a) {
+        if (a <= 1) {
             return 1;
         }
 
-        return a * fak(a-1);
+        return a * fak(a - 1);
     }
 
-    public static void kvikksortering0(int[] a, int v, int h){
-        if (v == h){
+    public static void kvikksortering0(int[] a, int v, int h) {
+        if (v == h) {
             return;
         }
         System.out.println("Kallet med [" + v + ":" + h + "] starter!");
-        int k = sParter0(a, v, h,(v + h)/2);
+        int k = sParter0(a, v, h, (v + h) / 2);
         System.out.println("Kallet med [" + v + ":" + h + "] er ferdig!");
     }
 
@@ -1013,17 +1016,15 @@ public class Tabell {
             while (v <= h && a[v] < skilleverdi) v++;   // h er stoppverdi for v
             while (v <= h && a[h] >= skilleverdi) h--;  // v er stoppverdi for h
 
-            if (v < h){
-                bytt(a,v++,h--);                        // bytter om a[v] og a[h]
-            }
-            else{
+            if (v < h) {
+                bytt(a, v++, h--);                        // bytter om a[v] og a[h]
+            } else {
                 return v;                               // partisjoneringen er ferdig
             }
         }
     }
 
-    private static int sParter0(int[] a, int v, int h, int indeks)
-    {
+    private static int sParter0(int[] a, int v, int h, int indeks) {
         bytt(a, indeks, h);         // skilleverdi a[indeks] flyttes bakerst
         int pos = parter0(a, v, h - 1, a[h]);  // partisjonerer a[v:h ? 1]
         bytt(a, pos, h);              // bytter for å få skilleverdien på rett plass

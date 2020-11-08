@@ -25,7 +25,7 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
         }
     }
 
-    private class EnkeltLenketListeIterator implements Iterator<T>{
+    private class EnkeltLenketListeIterator implements Iterator<T> {
         private Node<T> p = hode;
         private boolean fjernOK = false;
         private int iteratorendringer = endringer;
@@ -37,7 +37,7 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
         @Override
         public T next() {
-            if (!hasNext()){
+            if (!hasNext()) {
                 throw new NoSuchElementException("Ingen verdier!");
             }
 
@@ -50,29 +50,29 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
         @Override
         public void remove() {
-            if (!fjernOK){
+            if (!fjernOK) {
                 throw new IllegalStateException("Ulovlig tilstand");
             }
             fjernOK = false;
             Node<T> q = hode;
 
-            if (hode.neste == p){
+            if (hode.neste == p) {
                 hode = hode.neste;
 
-                if (p == null){
+                if (p == null) {
                     hale = null;
                 }
-            }else {
+            } else {
                 Node<T> r = hode;
 
-                while (r.neste.neste != p){
+                while (r.neste.neste != p) {
                     r = r.neste;
                 }
 
                 q = r.neste;
                 r.neste = p;
 
-                if (p == null){
+                if (p == null) {
                     hale = r;
                 }
 
@@ -192,13 +192,13 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
     @Override
     public int indeksTil(T verdi) {
-        if (verdi == null){
+        if (verdi == null) {
             return -1;
         }
 
         Node<T> p = hode;
-        for (int i = 0; i < antall; i++){
-            if (p.verdi.equals(verdi)){
+        for (int i = 0; i < antall; i++) {
+            if (p.verdi.equals(verdi)) {
                 return i;
             }
             p = p.neste;
@@ -221,30 +221,30 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
     @Override
     public boolean fjern(T verdi) {
-        if (verdi == null){
+        if (verdi == null) {
             return false;
         }
 
         Node<T> q = hode;
         Node<T> p = null;
 
-        while (q != null){
-            if (q.verdi.equals(verdi)){
+        while (q != null) {
+            if (q.verdi.equals(verdi)) {
                 break;
             }
             p = q;
             q = q.neste;
         }
 
-        if (q == null){
+        if (q == null) {
             return false;
-        }else if (q == hode){
+        } else if (q == hode) {
             hode = hode.neste;
-        }else {
+        } else {
             p.neste = q.neste;
         }
 
-        if (q == hale){
+        if (q == hale) {
             hale = p;
         }
 
@@ -336,11 +336,9 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
                 if (p == hode) {
                     if (p == hale) hale = null;
                     hode = hode.neste;
-                }
-                else if (p == hale){
+                } else if (p == hale) {
                     q.neste = null;
-                }
-                else{
+                } else {
                     q.neste = p.neste;
                 }
             }
@@ -384,15 +382,16 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
 
         return s.toString();
     }
+
     //Trenger forbedringer. Funker ikke helt som den skal
-    public static <T> void sorter(Ko<T> ko, Stakk<T> stakk, Comparator<? super T> c){
+    public static <T> void sorter(Ko<T> ko, Stakk<T> stakk, Comparator<? super T> c) {
         kopier(ko, stakk);
 
-        while (!stakk.tom()){
+        while (!stakk.tom()) {
             T temp = stakk.kikk();
             stakk.taUt();
 
-            while (!ko.tom() && c.compare(ko.kikk(), temp) < 0){
+            while (!ko.tom() && c.compare(ko.kikk(), temp) < 0) {
                 stakk.leggInn(ko.kikk());
                 ko.taUt();
             }
@@ -400,20 +399,20 @@ public class EnkeltLenketListe<T> implements Liste<T>, Ko<T> {
         }
     }
 
-    public static <T> void kopier(Ko<T> A, Stakk<T> B){
-        if (!B.tom()){
+    public static <T> void kopier(Ko<T> A, Stakk<T> B) {
+        if (!B.tom()) {
             throw new IllegalArgumentException("Stakk B må være tom!");
         }
 
         TabellStakk<T> C = new TabellStakk<>(A.antall());
         T temp;
 
-        while (A.antall() > 0){
+        while (A.antall() > 0) {
             temp = A.taUt();
             C.leggInn(temp);
         }
 
-        while (C.antall() > 0){
+        while (C.antall() > 0) {
             temp = C.taUt();
             B.leggInn(temp);
         }

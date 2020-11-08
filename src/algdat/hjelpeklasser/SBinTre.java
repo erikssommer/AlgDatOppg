@@ -119,7 +119,8 @@ public class SBinTre<T> implements Beholder<T> {
     @Override
     public void nullstill() {
         if (!tom()) nullstill(rot);  // nullstiller
-        rot = null; antall = 0;      // treet er nå tomt
+        rot = null;
+        antall = 0;      // treet er nå tomt
     }
 
     private void nullstill(Node<T> p) {

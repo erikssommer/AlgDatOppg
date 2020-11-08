@@ -14,20 +14,20 @@ public class HeapPrioritetsKo<T> implements PrioritetsKo<T> {
     public HeapPrioritetsKo(int kapasitet, Comparator<? super T> comp) {
         if (kapasitet < 0) throw new IllegalArgumentException("Negativ kapasitet er ikke mulig");
 
-        heap = (T[]) new Object[kapasitet+1];
+        heap = (T[]) new Object[kapasitet + 1];
         antall = 0;
         this.comp = comp;
     }
 
-    public HeapPrioritetsKo(Comparator<? super T> comp){
+    public HeapPrioritetsKo(Comparator<? super T> comp) {
         this(8, comp);
     }
 
-    public static <T extends Comparable<? super T>> HeapPrioritetsKo<T> naturligOrden(int kapasitet){
+    public static <T extends Comparable<? super T>> HeapPrioritetsKo<T> naturligOrden(int kapasitet) {
         return new HeapPrioritetsKo<>(kapasitet, Comparator.naturalOrder());
     }
 
-    public static <T extends Comparable<? super T>> HeapPrioritetsKo<T> naturligOrden(){
+    public static <T extends Comparable<? super T>> HeapPrioritetsKo<T> naturligOrden() {
         return naturligOrden(8);
     }
 
@@ -35,13 +35,13 @@ public class HeapPrioritetsKo<T> implements PrioritetsKo<T> {
     public void leggInn(T verdi) {
         Objects.requireNonNull(verdi, "Verdi er null!");
 
-        if (++antall == heap.length) heap = Arrays.copyOf(heap, 2*antall);
+        if (++antall == heap.length) heap = Arrays.copyOf(heap, 2 * antall);
 
         int k = antall;
         heap[0] = verdi;
 
-        while (comp.compare(verdi, heap[k/2]) < 0){
-            heap[k] = heap[k/2];
+        while (comp.compare(verdi, heap[k / 2]) < 0) {
+            heap[k] = heap[k / 2];
             k /= 2;
         }
         heap[0] = null;
@@ -81,7 +81,7 @@ public class HeapPrioritetsKo<T> implements PrioritetsKo<T> {
     }
 
     @Override
-    public String toString(){
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append('[');
 
