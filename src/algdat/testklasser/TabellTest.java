@@ -1,6 +1,6 @@
 package algdat.testklasser;
 
-import algdat.hjelpeklasser.Tabell;
+import algdat.datastrukturer.Tabell;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;

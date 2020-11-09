@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke7.seksjon412;
 
-import algdat.hjelpeklasser.TabellStakk;
+import algdat.datastrukturer.TabellStakk;
 
 public class Oppgave3 {
     public static void main(String[] args) {

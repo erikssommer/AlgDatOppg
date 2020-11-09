@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke8.seksjon517;
 
-import algdat.hjelpeklasser.BinTre;
+import algdat.datastrukturer.BinTre;
 
 public class Oppgave4 {
     public static void main(String[] args) {

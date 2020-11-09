@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke8.seksjon516;
 
-import algdat.hjelpeklasser.BinTre;
-import algdat.hjelpeklasser.Tabell;
+import algdat.datastrukturer.BinTre;
+import algdat.datastrukturer.Tabell;
 
 import java.util.Arrays;
 

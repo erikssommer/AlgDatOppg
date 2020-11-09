@@ -2,8 +2,8 @@ package algdat.ukeoppgaver.uke3.seksjon134;
 
 import java.util.Arrays;
 
-import static algdat.hjelpeklasser.Tabell.min;
-import static algdat.hjelpeklasser.Tabell.bytt;
+import static algdat.datastrukturer.Tabell.min;
+import static algdat.datastrukturer.Tabell.bytt;
 
 public class Oppgave1 {
     public static void main(String[] args) {

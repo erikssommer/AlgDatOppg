@@ -1,11 +1,9 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
 import java.util.StringJoiner;
-import java.util.function.Consumer;
 import java.util.function.ObjIntConsumer;
 
 public class BinTre<T> {

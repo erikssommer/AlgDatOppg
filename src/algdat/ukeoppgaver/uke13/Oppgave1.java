@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke13;
 
-import algdat.hjelpeklasser.RSBinTre;
-import algdat.hjelpeklasser.Tabell;
+import algdat.datastrukturer.RSBinTre;
+import algdat.datastrukturer.Tabell;
 
 public class Oppgave1 {
     public static void main(String[] args) {

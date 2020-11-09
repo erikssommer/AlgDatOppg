@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke9.seksjon527;
 
-import algdat.hjelpeklasser.SBinTre;
+import algdat.datastrukturer.SBinTre;
 
 import java.util.stream.Stream;
 

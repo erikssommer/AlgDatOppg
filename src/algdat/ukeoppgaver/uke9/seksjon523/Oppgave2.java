@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke9.seksjon523;
 
-import algdat.hjelpeklasser.SBinTre;
+import algdat.datastrukturer.SBinTre;
 
 import java.util.Comparator;
 import java.util.stream.Stream;

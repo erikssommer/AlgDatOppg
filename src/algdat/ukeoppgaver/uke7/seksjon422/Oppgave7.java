@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke7.seksjon422;
 
-import algdat.hjelpeklasser.Ko;
-import algdat.hjelpeklasser.TabellKo;
+import algdat.datastrukturer.Ko;
+import algdat.datastrukturer.TabellKo;
 
 public class Oppgave7 {
     public static void main(String[] args) {

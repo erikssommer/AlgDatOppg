@@ -1,7 +1,6 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 import java.util.NoSuchElementException;
-import java.util.Stack;
 import java.util.StringJoiner;
 
 public class TabellKo<T> implements Ko<T> {

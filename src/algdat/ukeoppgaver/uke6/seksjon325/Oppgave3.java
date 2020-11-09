@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke6.seksjon325;
 
-import algdat.hjelpeklasser.Liste;
-import algdat.hjelpeklasser.TabellListe;
+import algdat.datastrukturer.Liste;
+import algdat.datastrukturer.TabellListe;
 
 import java.util.Iterator;
 

@@ -1,4 +1,4 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 public interface Ko<T> {
     public boolean leggInn(T verdi);

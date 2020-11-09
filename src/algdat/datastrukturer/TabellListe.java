@@ -1,8 +1,7 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 import java.util.*;
 import java.util.function.Consumer;
-import java.util.function.Predicate;
 
 public class TabellListe<T> implements Liste<T> {
     private T[] a;

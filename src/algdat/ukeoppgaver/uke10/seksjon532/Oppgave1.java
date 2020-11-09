@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke10.seksjon532;
 
-import algdat.hjelpeklasser.BinTre;
+import algdat.datastrukturer.BinTre;
 
 import java.util.Comparator;
 

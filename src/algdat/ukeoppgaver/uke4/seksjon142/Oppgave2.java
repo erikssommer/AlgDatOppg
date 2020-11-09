@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke4.seksjon142;
 
-import algdat.hjelpeklasser.Tabell;
+import algdat.datastrukturer.Tabell;
 
 import java.util.Arrays;
 

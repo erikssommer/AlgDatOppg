@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke9.seksjon525;
 
-import algdat.hjelpeklasser.SBinTre;
+import algdat.datastrukturer.SBinTre;
 
 public class Oppgave1 {
     public static void main(String[] args) {

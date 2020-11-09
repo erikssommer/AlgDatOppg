@@ -1,8 +1,6 @@
 package algdat.ukeoppgaver.uke6.seksjon334;
 
-import algdat.hjelpeklasser.EnkeltLenketListe;
-import algdat.hjelpeklasser.Liste;
-import algdat.hjelpeklasser.TabellListe;
+import algdat.datastrukturer.EnkeltLenketListe;
 
 import java.util.Iterator;
 

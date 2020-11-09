@@ -1,4 +1,4 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 @FunctionalInterface
 public interface Oppgave<T> {

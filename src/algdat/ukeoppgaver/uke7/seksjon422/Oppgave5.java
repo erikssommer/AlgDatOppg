@@ -1,9 +1,9 @@
 package algdat.ukeoppgaver.uke7.seksjon422;
 
-import algdat.hjelpeklasser.Ko;
-import algdat.hjelpeklasser.Stakk;
-import algdat.hjelpeklasser.TabellKo;
-import algdat.hjelpeklasser.TabellStakk;
+import algdat.datastrukturer.Ko;
+import algdat.datastrukturer.Stakk;
+import algdat.datastrukturer.TabellKo;
+import algdat.datastrukturer.TabellStakk;
 
 public class Oppgave5 {
     public static void main(String[] args) {

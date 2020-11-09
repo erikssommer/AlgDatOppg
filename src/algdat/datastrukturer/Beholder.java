@@ -1,4 +1,4 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 import java.util.Iterator;
 import java.util.Objects;

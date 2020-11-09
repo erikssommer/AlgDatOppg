@@ -1,10 +1,10 @@
 package algdat.ukeoppgaver.uke7.seksjon424;
 
-import algdat.hjelpeklasser.Tabell;
-import algdat.hjelpeklasser.EnkeltLenketListe;
-import algdat.hjelpeklasser.Ko;
-import algdat.hjelpeklasser.Stakk;
-import algdat.hjelpeklasser.TabellStakk;
+import algdat.datastrukturer.Tabell;
+import algdat.datastrukturer.EnkeltLenketListe;
+import algdat.datastrukturer.Ko;
+import algdat.datastrukturer.Stakk;
+import algdat.datastrukturer.TabellStakk;
 
 import java.util.Comparator;
 

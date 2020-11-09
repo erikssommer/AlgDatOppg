@@ -1,4 +1,4 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 public interface Stakk<T> {
     public void leggInn(T verdi);

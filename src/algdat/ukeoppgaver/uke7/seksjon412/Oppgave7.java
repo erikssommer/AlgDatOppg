@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke7.seksjon412;
 
-import algdat.hjelpeklasser.TabellStakk;
+import algdat.datastrukturer.TabellStakk;
 
 import java.util.Comparator;
 

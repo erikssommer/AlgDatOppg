@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke10.seksjon533;
 
-import algdat.hjelpeklasser.HeapPrioritetsKo;
-import algdat.hjelpeklasser.PrioritetsKo;
+import algdat.datastrukturer.HeapPrioritetsKo;
+import algdat.datastrukturer.PrioritetsKo;
 
 public class Oppgave1 {
     public static void main(String[] args) {

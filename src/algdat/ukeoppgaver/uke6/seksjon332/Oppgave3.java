@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke6.seksjon332;
 
-import algdat.hjelpeklasser.EnkeltLenketListe;
+import algdat.datastrukturer.EnkeltLenketListe;
 
 public class Oppgave3 {
     public static void main(String[] args) {

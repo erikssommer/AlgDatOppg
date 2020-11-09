@@ -1,4 +1,4 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 public interface PrioritetsKo<T> {
     public void leggInn(T verdi);            // Java: add/offer

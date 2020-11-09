@@ -1,9 +1,8 @@
-package algdat.hjelpeklasser;
+package algdat.datastrukturer;
 
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
-import java.util.Stack;
 
 public class TabellStakk<T> implements Stakk<T> {
     private T[] a;

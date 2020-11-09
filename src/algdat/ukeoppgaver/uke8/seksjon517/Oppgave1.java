@@ -1,6 +1,6 @@
 package algdat.ukeoppgaver.uke8.seksjon517;
 
-import algdat.hjelpeklasser.BinTre;
+import algdat.datastrukturer.BinTre;
 
 import java.util.StringJoiner;
 

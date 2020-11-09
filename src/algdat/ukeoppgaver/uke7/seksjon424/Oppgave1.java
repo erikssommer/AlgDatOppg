@@ -1,7 +1,7 @@
 package algdat.ukeoppgaver.uke7.seksjon424;
 
-import algdat.hjelpeklasser.EnkeltLenketListe;
-import algdat.hjelpeklasser.Ko;
+import algdat.datastrukturer.EnkeltLenketListe;
+import algdat.datastrukturer.Ko;
 
 public class Oppgave1 {
     public static void main(String[] args) {
