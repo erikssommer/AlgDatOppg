@@ -44,3 +44,5 @@ Oversikt over temaene:
 
 * 11.1 Datastrukturer for grafer
 * 11.2 Korteste vei i graf
+
+Kompendium: https://www.cs.hioa.no/~ulfu/appolonius/
