@@ -2,6 +2,7 @@ package algdat.hjelpeklasser;
 
 import java.util.Comparator;
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
 public class RSBinTre<T> implements Beholder<T> {
     private static final boolean SVART = true;
@@ -179,7 +180,7 @@ public class RSBinTre<T> implements Beholder<T> {
 
     @Override
     public int antall() {
-        return 0;
+        return antall;
     }
 
     @Override
@@ -189,11 +190,87 @@ public class RSBinTre<T> implements Beholder<T> {
 
     @Override
     public void nullstill() {
-
+        rot = NULL;
+        antall = 0;
     }
 
     @Override
-    public Iterator<T> iterator() {
-        return null;
+    public Iterator<T> iterator()
+    {
+        return new InordenIterator();
+    }
+
+    private final class InordenIterator implements Iterator<T> {
+        private final Stakk<Node<T>> s;
+        private Node<T> p;
+
+        private InordenIterator() {
+            s = new TabellStakk<>();
+            if (rot == NULL) p = NULL;     // tomt tre
+            else p = forst(s,rot);
+        }
+
+        // den første i inorden i det treet som har p som rot
+        private Node<T> forst(Stakk<Node<T>> s, Node<T> p) {
+            while (p.venstre != NULL) {
+                s.leggInn(p);
+                p = p.venstre;
+            }
+            return p;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return p != NULL;
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+        @Override
+        public T next(){  // neste er med hensyn på inorden
+            if (p == NULL)
+                throw new NoSuchElementException();
+
+            T verdi = p.verdi;
+
+            if (p.hoyre != NULL) p = forst(s,p.hoyre);
+            else p = s.tom() ? NULL : s.taUt();
+            return verdi;
+        }
+    }
+
+    public int hoyde() {
+        return hoyde(rot);
+    }
+
+    private int hoyde(Node<T> p) {
+        if (p == NULL) return -1;
+        return 1 + Math.max(hoyde(p.venstre), hoyde(p.hoyre));
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder s = new StringBuilder();
+        s.append('[');
+        if (!tom()) toString(rot,s);
+        s.append(']');
+        return s.toString();
+    }
+
+    private void toString(Node<T> p, StringBuilder s) {
+        if (p.venstre != NULL) {
+            toString(p.venstre, s);
+            s.append(',').append(' ');
+        }
+
+        s.append(p.verdi);
+
+        if (p.hoyre != NULL) {
+            s.append(',').append(' ');
+            toString(p.hoyre, s);
+        }
     }
 }
