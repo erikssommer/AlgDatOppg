@@ -8,7 +8,7 @@ public class Oppgave2 {
 
         TabellListe<String> tabellListe = new TabellListe<>(s);
 
-        tabellListe.fjernHvis(s1 -> s1.equals("Markus"));
+        System.out.println(tabellListe.fjernHvis(s1 -> s1.equals("Markus")));
         tabellListe.forEach(System.out::println);
     }
 }
