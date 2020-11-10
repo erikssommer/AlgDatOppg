@@ -50,6 +50,22 @@ public final class Graf implements Iterable<String> {
         return noder.keySet().toArray(new String[0]);
     }
 
+    public void leggInnKant(String fraNode, String tilNode){
+        if (fraNode.equals(tilNode)) throw new NoSuchElementException(fraNode + " er lik " + tilNode);
 
+        Node fra = noder.get(fraNode);
+        if (fra == null) throw new NoSuchElementException(fraNode + " er ukjent!");
+        Node til = noder.get(tilNode);
+        if (til == null) throw new NoSuchElementException(tilNode + " er ukjent!");
+
+        if (fra.kanter.contains(til)) throw new IllegalArgumentException("kanten finnes fra før!");
+
+        til.innkanter++;
+        fra.kanter.add(til);
+    }
+
+    public void leggInnKanter(String franode, String... tilnoder){
+        for (String tilnode : tilnoder) leggInnKant(franode, tilnode);
+    }
 
 }
