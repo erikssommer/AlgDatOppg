@@ -19,5 +19,7 @@ public class Oppgave3 {
         graf.leggInnKanter("G", "D","E","F");
 
         for (String navn : graf) System.out.print(navn + " ");
+
+        for (String node : graf) System.out.println(node + " -> " + graf.kanterFra(node));
     }
 }

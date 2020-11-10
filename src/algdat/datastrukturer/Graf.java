@@ -1,5 +1,9 @@
 package algdat.datastrukturer;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.*;
 
 public final class Graf implements Iterable<String> {
@@ -22,6 +26,24 @@ public final class Graf implements Iterable<String> {
     }
 
     private final Map<String, Node> noder;
+
+    public Graf(String url) throws IOException {
+        this();
+
+        BufferedReader inn = new BufferedReader(new InputStreamReader((new URL(url)).openStream()));
+
+        String linje;
+        while ((linje = inn.readLine()) != null){
+            String[] navn = linje.split(" ");
+            leggInnNode(navn[0]);
+
+            for (int i = 1; i < navn.length; i++){
+                leggInnNode(navn[i]);
+                leggInnKant(navn[0], navn[i]);
+            }
+        }
+        inn.close();
+    }
 
     public Graf(){
         noder = new HashMap<>();
@@ -66,6 +88,18 @@ public final class Graf implements Iterable<String> {
 
     public void leggInnKanter(String franode, String... tilnoder){
         for (String tilnode : tilnoder) leggInnKant(franode, tilnode);
+    }
+
+    public String kanterFra(String node){
+        Node fra = noder.get(node);
+        if (fra == null) return null;
+        return fra.kanter.toString();
+    }
+
+    public boolean erUrettet(){
+        for (Node p : noder.values()) if (p.innkanter != p.kanter.size()) return false;
+        for (Node p : noder.values()) for (Node q : p.kanter) if (!q.kanter.contains(p)) return false;
+        return true;
     }
 
 }
