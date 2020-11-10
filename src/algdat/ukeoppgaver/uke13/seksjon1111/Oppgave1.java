@@ -1,4 +1,4 @@
-package algdat.ukeoppgaver.uke13;
+package algdat.ukeoppgaver.uke13.seksjon1111;
 
 import algdat.datastrukturer.RSBinTre;
 import algdat.datastrukturer.Tabell;

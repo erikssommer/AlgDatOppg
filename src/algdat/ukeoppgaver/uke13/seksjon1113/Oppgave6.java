@@ -1,4 +1,4 @@
-package algdat.ukeoppgaver.uke13;
+package algdat.ukeoppgaver.uke13.seksjon1113;
 
 import algdat.datastrukturer.MatriseGraf;
 

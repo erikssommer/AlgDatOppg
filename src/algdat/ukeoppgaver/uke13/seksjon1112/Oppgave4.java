@@ -1,4 +1,4 @@
-package algdat.ukeoppgaver.uke13;
+package algdat.ukeoppgaver.uke13.seksjon1112;
 
 import algdat.datastrukturer.Graf;
 
