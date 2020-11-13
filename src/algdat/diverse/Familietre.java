@@ -51,7 +51,7 @@ public class Familietre {
 
     private void inorden(Node node){
         if (node.left_child != null) inorden(node.left_child);
-        System.out.println(node.name);
+        System.out.print(node.name + ", ");
         if (node.right_child != null) inorden(node.right_child);
     }
 
@@ -71,7 +71,7 @@ public class Familietre {
 
         System.out.println("Tanten til Karl er: " + familietre.finnOnkel(familietre.rot.left_child.left_child));
         System.out.println("Onkelen til Thea er: " + familietre.finnOnkel(familietre.rot.right_child.left_child));
-        System.out.println(familietre);
+        System.out.println("(inorden)" + familietre);
     }
 
 }
