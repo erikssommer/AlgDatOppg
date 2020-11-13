@@ -3,9 +3,9 @@ package algdat.diverse;
 import java.util.Arrays;
 
 public class Familietre {
-    public static final class Medlem {
-        private String navn;
-        private Medlem forelder;
+    public static final class Medlem { // Gjort indre klasse public for enkelhets skyld
+        private final String navn;
+        private final Medlem forelder;
         private Medlem venstre_barn;
         private Medlem hoyre_barn;
 
@@ -25,7 +25,7 @@ public class Familietre {
         }
     }
 
-    private Medlem rot;
+    private final Medlem rot;
     private int antall;
 
     public Familietre(String navn){
@@ -36,9 +36,19 @@ public class Familietre {
     public void leggInn(Medlem medlem){
         if (medlem.forelder.venstre_barn == null){
             medlem.forelder.venstre_barn = medlem;
+            antall++;
         }else if (medlem.forelder.hoyre_barn == null){
             medlem.forelder.hoyre_barn = medlem;
+            antall++;
         }
+    }
+
+    public Medlem rotMedlem(){
+        return rot;
+    }
+
+    public int antallMedlemmer(){
+        return antall;
     }
 
     public String finnOnkel(Medlem sibling){
@@ -88,10 +98,10 @@ public class Familietre {
     public static void main(String[] args) {
         Familietre familietre = new Familietre("Olga");
 
-        Medlem hans = new Medlem("Hans", familietre.rot);
+        Medlem hans = new Medlem("Hans", familietre.rotMedlem());
         familietre.leggInn(hans);
 
-        Medlem sofia = new Medlem("Sofia", familietre.rot);
+        Medlem sofia = new Medlem("Sofia", familietre.rotMedlem());
         familietre.leggInn(sofia);
 
         Medlem karl = new Medlem("Karl", hans);
@@ -117,8 +127,9 @@ public class Familietre {
         System.out.println("Tanten til Tobias er: " + familietre.finnOnkel(tobias));
         System.out.println("Tobias sitt søsken: " + familietre.finnSosken(tobias));
         System.out.println("Karl sitt søsken: " + familietre.finnSosken(karl));
-        System.out.println("Olga sine barn er: " + familietre.finnBarn(familietre.rot));
+        System.out.println("Olga sine barn er: " + familietre.finnBarn(familietre.rotMedlem()));
         System.out.println("Tobias sine barn er: " + familietre.finnBarn(tobias));
+        System.out.println("Familien har: " + familietre.antallMedlemmer() + " medlemmer");
         System.out.println("(inorden)" + familietre);
     }
 
