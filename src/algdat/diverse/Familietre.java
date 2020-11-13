@@ -1,25 +1,27 @@
 package algdat.diverse;
 
+import java.util.Arrays;
+
 public class Familietre {
     public static final class Medlem {
-        private String name;
-        private Medlem parent;
-        private Medlem left_child;
-        private Medlem right_child;
+        private String navn;
+        private Medlem forelder;
+        private Medlem venstre_barn;
+        private Medlem hoyre_barn;
 
-        public Medlem(String name, Medlem parent, Medlem left_child, Medlem right_child){
-            this.name = name;
-            this.parent = parent;
-            this.left_child = left_child;
-            this.right_child = right_child;
+        public Medlem(String navn, Medlem forelder, Medlem venstre_barn, Medlem hoyre_barn){
+            this.navn = navn;
+            this.forelder = forelder;
+            this.venstre_barn = venstre_barn;
+            this.hoyre_barn = hoyre_barn;
         }
 
-        public Medlem(String name){
-            this(name, null, null, null);
+        public Medlem(String navn){
+            this(navn, null, null, null);
         }
 
-        public Medlem(String name, Medlem parent){
-            this(name, parent, null, null);
+        public Medlem(String navn, Medlem forelder){
+            this(navn, forelder, null, null);
         }
     }
 
@@ -32,27 +34,49 @@ public class Familietre {
     }
 
     public void leggInn(Medlem medlem){
-        if (medlem.parent.left_child == null){
-            medlem.parent.left_child = medlem;
-        }else if (medlem.parent.right_child == null){
-            medlem.parent.right_child = medlem;
+        if (medlem.forelder.venstre_barn == null){
+            medlem.forelder.venstre_barn = medlem;
+        }else if (medlem.forelder.hoyre_barn == null){
+            medlem.forelder.hoyre_barn = medlem;
         }
     }
 
     public String finnOnkel(Medlem sibling){
-        if (sibling.parent != null && sibling.parent.parent != null && sibling.parent.parent.left_child != null && sibling.parent.parent.left_child != sibling.parent) {
-            return sibling.parent.parent.left_child.name;
-        }else if (sibling.parent != null && sibling.parent.parent != null && sibling.parent.parent.right_child != null){
-            return sibling.parent.parent.right_child.name;
+        if (sibling.forelder != null && sibling.forelder.forelder != null && sibling.forelder.forelder.venstre_barn != null && sibling.forelder.forelder.venstre_barn != sibling.forelder) {
+            return sibling.forelder.forelder.venstre_barn.navn;
+        }else if (sibling.forelder != null && sibling.forelder.forelder != null && sibling.forelder.forelder.hoyre_barn != null){
+            return sibling.forelder.forelder.hoyre_barn.navn;
         } else {
-            return "Har ikke en onkel";
+            return sibling.navn + " har ikke en onkel";
         }
     }
 
+    public String finnSosken(Medlem medlem){
+        if (medlem.forelder.venstre_barn == medlem && medlem.forelder.hoyre_barn != null){
+            return medlem.forelder.hoyre_barn.navn;
+        }else if (medlem.forelder.hoyre_barn == medlem && medlem.forelder.venstre_barn != null){
+            return medlem.forelder.venstre_barn.navn;
+        }else {
+            return medlem.navn + " har ikke søsken";
+        }
+    }
+
+    public String finnBarn(Medlem medlem){
+        String barn = "";
+        if (medlem.venstre_barn != null){
+            barn += medlem.venstre_barn.navn + " ";
+        }
+        if (medlem.hoyre_barn != null){
+            barn += medlem.hoyre_barn.navn;
+        }
+
+        return barn.equals("") ? "har ingen barn" : barn;
+    }
+
     private void inorden(Medlem medlem){
-        if (medlem.left_child != null) inorden(medlem.left_child);
-        System.out.print(medlem.name + ", ");
-        if (medlem.right_child != null) inorden(medlem.right_child);
+        if (medlem.venstre_barn != null) inorden(medlem.venstre_barn);
+        System.out.print(medlem.navn + ", ");
+        if (medlem.hoyre_barn != null) inorden(medlem.hoyre_barn);
     }
 
     @Override
@@ -63,6 +87,7 @@ public class Familietre {
 
     public static void main(String[] args) {
         Familietre familietre = new Familietre("Olga");
+
         Medlem hans = new Medlem("Hans", familietre.rot);
         familietre.leggInn(hans);
 
@@ -75,8 +100,25 @@ public class Familietre {
         Medlem thea = new Medlem("Thea", sofia);
         familietre.leggInn(thea);
 
+        Medlem mari = new Medlem("Mari", karl);
+        familietre.leggInn(mari);
+
+        Medlem petter = new Medlem("Petter", sofia);
+        familietre.leggInn(petter);
+
+        Medlem tobias = new Medlem("Tobias", hans);
+        familietre.leggInn(tobias);
+
         System.out.println("Tanten til Karl er: " + familietre.finnOnkel(karl));
         System.out.println("Onkelen til Thea er: " + familietre.finnOnkel(thea));
+        System.out.println("Onkelen til Hans er: " + familietre.finnOnkel(hans));
+        System.out.println("Onelen til Mari er: " + familietre.finnOnkel(mari));
+        System.out.println("Onelen til Petter er: " + familietre.finnOnkel(petter));
+        System.out.println("Tanten til Tobias er: " + familietre.finnOnkel(tobias));
+        System.out.println("Tobias sitt søsken: " + familietre.finnSosken(tobias));
+        System.out.println("Karl sitt søsken: " + familietre.finnSosken(karl));
+        System.out.println("Olga sine barn er: " + familietre.finnBarn(familietre.rot));
+        System.out.println("Tobias sine barn er: " + familietre.finnBarn(tobias));
         System.out.println("(inorden)" + familietre);
     }
 
