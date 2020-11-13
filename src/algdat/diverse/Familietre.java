@@ -33,9 +33,19 @@ public class Familietre {
 
     public void leggInn(String name, Node parent){
         if (parent.left_child == null){
-            parent.left_child = new Node(name);
+            parent.left_child = new Node(name, parent);
         }else if (parent.right_child == null){
             parent.right_child = new Node(name, parent);
+        }
+    }
+
+    public String finnOnkel(Node sibling){
+        if (sibling.parent != null && sibling.parent.parent != null && sibling.parent.parent.left_child != null && sibling.parent.parent.left_child != sibling.parent) {
+            return sibling.parent.parent.left_child.name;
+        }else if (sibling.parent != null && sibling.parent.parent != null && sibling.parent.parent.right_child != null){
+            return sibling.parent.parent.right_child.name;
+        } else {
+            return "Har ikke en onkel";
         }
     }
 
@@ -57,7 +67,10 @@ public class Familietre {
         familietre.leggInn("Sofia", familietre.rot);
         familietre.leggInn("Karl", familietre.rot.left_child);
         familietre.leggInn("Thea", familietre.rot.right_child);
+        familietre.leggInn("Markus", familietre.rot.right_child.left_child);
 
+        System.out.println("Tanten til Karl er: " + familietre.finnOnkel(familietre.rot.left_child.left_child));
+        System.out.println("Onkelen til Thea er: " + familietre.finnOnkel(familietre.rot.right_child.left_child));
         System.out.println(familietre);
     }
 
