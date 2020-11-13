@@ -169,6 +169,29 @@ public class Tabell {
         }
     }
 
+    public static int nestmaks(int[] a){
+        int n = a.length;
+        if (n < 2) throw new NoSuchElementException("a.length(" + n + ") < 2!");
+
+        int m = a[0];
+        int nm = a[1];
+
+        if (m < nm){
+            m = a[1];
+            nm = a[0];
+        }
+
+        for (int i = 2; i < a.length; i++){
+            if (a[i] > nm){
+                nm = m;
+                m = a[i];
+            }else {
+                nm = a[i];
+            }
+        }
+        return nm;
+    }
+
     public static int[] nestMaks(int[] a) {
         int n = a.length;
 
