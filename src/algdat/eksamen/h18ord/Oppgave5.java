@@ -13,7 +13,7 @@ public class Oppgave5 {
      */
 
     /*
-     * b) Kodet metoden remove(Node q)
+     * b) Kodet metoden remove(Medlem q)
      */
 
     /*
