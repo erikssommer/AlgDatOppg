@@ -6,6 +6,7 @@ package algdat.diverse;
 
 public class Lambda {
 
+    @FunctionalInterface
     interface MyInterface{
         public void sum(int a, int b);
     }
