@@ -2,6 +2,12 @@ package algdat.diverse;
 
 import java.util.Arrays;
 
+/**
+ * Heap sort bruker datastrukturen heap til å organisere elementene i datasettet som skal sorteres.
+ * Det viktigste fortrinnet til heapsort er at den har en konstant kjøretid på O(n log n), også i dårlige tilfeller.
+ * Dette gjør at den er godt egnet i datasystemer der man ikke kan risikere forsinkelser.
+ */
+
 public class HeapSort {
 
     public static void heapsort(int[] values) {
