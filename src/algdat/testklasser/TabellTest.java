@@ -301,12 +301,16 @@ class TabellTest {
 
     @Test
     void parter() {
-        Integer[] liste = {11,2,17,1,9,8,12,14,15,3,19,18,7,10,16,20,13,4,6,5};
-        Tabell.parter(liste, 6, Comparator.naturalOrder());
-        Tabell.parter(liste, 10, Comparator.naturalOrder());
-        Tabell.parter(liste, 15, Comparator.naturalOrder());
+        Integer[] integers = {11,2,17,1,9,8,12,14,15,3,19,18,7,10,16,20,13,4,6,5};
+        Tabell.parter(integers, 6, Comparator.naturalOrder());
+        Tabell.parter(integers, 10, Comparator.naturalOrder());
+        Tabell.parter(integers, 15, Comparator.naturalOrder());
         assertEquals("[5, 2, 4, 1, 3, 8, 6, 7, 9, 11, 12, 13, 14, 10, 16, 20, 18, 17, 19, 15]",
-                Arrays.toString(liste));
+                Arrays.toString(integers));
+
+        Character[] characters = {'B','C','K','A', 'F', 'L', 'T'};
+        Tabell.parter(characters, 'K', Comparator.naturalOrder());
+        assertEquals("[B, C, F, A, K, L, T]", Arrays.toString(characters));
     }
 
     @Test
