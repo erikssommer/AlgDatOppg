@@ -79,9 +79,15 @@ class TabellTest {
 
         assertEquals("[2, 2, 3, 3, 4, 7, 7, 8, 32, 76]", Arrays.toString(liste1));
 
+        //double[] doubles = {3.43,4.32};
+        //Tabell.sort(doubles);
+
         Integer[] liste2 = {76,3,2,7,32,4,2,7,8,3};
         Tabell.sort(liste2);
 
+        Double[] doubless = {3.43,4.32};
+
+        Tabell.sort(doubless);
         assertEquals("[2, 2, 3, 3, 4, 7, 7, 8, 32, 76]", Arrays.toString(liste2));
     }
 

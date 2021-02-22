@@ -11,7 +11,7 @@ public final class MatriseGraf {
     private int[] indeks;
     private int[] forrige;
 
-    public MatriseGraf(int dimensjon){
+    public MatriseGraf(int dimensjon) {
         graf = new boolean[dimensjon][dimensjon];
         antall = 0;
         navn = new String[dimensjon];
@@ -19,31 +19,31 @@ public final class MatriseGraf {
         indeks = new int[dimensjon];
     }
 
-    public MatriseGraf(){
+    public MatriseGraf() {
         this(10);
     }
 
-    public int antallNoder(){
+    public int antallNoder() {
         return antall;
     }
 
-    public int dimensjon(){
+    public int dimensjon() {
         return graf.length;
     }
 
-    public String[] nodenavn(){
+    public String[] nodenavn() {
         return Arrays.copyOf(snavn, antall);
     }
 
-    private int finn(String nodenavn){
+    private int finn(String nodenavn) {
         return Arrays.binarySearch(snavn, 0, antall, nodenavn);
     }
 
-    public boolean nodeFinnes(String nodenavn){
+    public boolean nodeFinnes(String nodenavn) {
         return finn(nodenavn) >= 0;
     }
 
-    private void utvid(){
+    private void utvid() {
         int nydimensjon = graf.length == 0 ? 1 : 2 * graf.length;
 
         navn = Arrays.copyOf(navn, nydimensjon);
@@ -56,7 +56,7 @@ public final class MatriseGraf {
         for (int i = 0; i < antall; i++) System.arraycopy(gammelgraf[i], 0, graf[i], 0, antall);
     }
 
-    public boolean leggInnNode(String nodenavn){
+    public boolean leggInnNode(String nodenavn) {
         if (navn == null || nodenavn.length() == 0) throw new IllegalArgumentException("Noden må ha et navn");
 
         int rad = finn(nodenavn);
@@ -65,9 +65,9 @@ public final class MatriseGraf {
 
         rad = -(rad + 1);
 
-        for (int i = antall; i > rad; i--){
-            snavn[i] = snavn[i-1];
-            indeks[i] = indeks[i-1];
+        for (int i = antall; i > rad; i--) {
+            snavn[i] = snavn[i - 1];
+            indeks[i] = indeks[i - 1];
         }
 
         snavn[rad] = nodenavn;
