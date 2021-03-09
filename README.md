@@ -1,4 +1,4 @@
-# Algoritmer og datastrukturer / Algorithms and data structures
+# Data structures and algorithms / Algoritmer og datastrukturer
 
 Oversikt over temaene:
 
