@@ -21,7 +21,7 @@ public final class Heltall implements Comparable<Heltall>{
          * else if (verdi == h.verdi) return 0;
          * else return 1;
          */
-        return verdi < h.verdi ? -1 : (verdi == h.verdi ? 0 : 1);
+        return Integer.compare(verdi, h.verdi);
     }
 
     @Override

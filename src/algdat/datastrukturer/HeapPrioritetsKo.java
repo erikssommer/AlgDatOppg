@@ -8,7 +8,7 @@ import java.util.Objects;
 public class HeapPrioritetsKo<T> implements PrioritetsKo<T> {
     private T[] heap;
     private int antall;
-    private Comparator<? super T> comp;
+    private final Comparator<? super T> comp;
 
     @SuppressWarnings("unchecked")
     public HeapPrioritetsKo(int kapasitet, Comparator<? super T> comp) {

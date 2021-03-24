@@ -9,7 +9,7 @@ public class RSBinTre<T> implements Beholder<T> {
     public static final boolean ROD = false;
 
     private static final class Node<T>{
-        private T verdi;
+        private final T verdi;
         private Node<T> venstre;
         private Node<T> hoyre;
         private boolean farge;

@@ -4,7 +4,7 @@ import java.util.Objects;
 
 public class Klokkeslett implements Comparable<Klokkeslett> {
 
-    private String tid;
+    private final String tid;
 
     public Klokkeslett(String tid){
         this.tid = tid;

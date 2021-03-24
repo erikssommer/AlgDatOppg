@@ -3,8 +3,8 @@ package algdat.eksempelklasser;
 import java.util.Objects;
 
 public class Tid implements Comparable<Tid>{
-    private Klokkeslett klokkeslett;
-    private Dato dato;
+    private final Klokkeslett klokkeslett;
+    private final Dato dato;
 
     public Tid(Klokkeslett klokkeslett, Dato dato){
         this.klokkeslett = klokkeslett;

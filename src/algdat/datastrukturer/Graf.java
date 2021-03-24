@@ -12,8 +12,8 @@ public final class Graf implements Iterable<String> {
         private final String navn;
         private final List<Node> kanter;
         private byte innkanter = 0;
-        private boolean besokt = false;
-        private Node forrige = null;
+        private final boolean besokt = false;
+        private final Node forrige = null;
 
         private Node(String navn){
             this.navn = navn;
