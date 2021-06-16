@@ -5,7 +5,7 @@ public class Collection {
 
     public static int max(int[] a, int from, int to){
         int maxindex = from;
-        int maxvalue = a[maxindex];
+        int maxvalue = a[from];
 
         for (int i = from + 1; i < to; i++){
             if (a[i] > maxvalue){
@@ -14,5 +14,18 @@ public class Collection {
             }
         }
         return maxindex;
+    }
+
+    public static int min(int[] a, int from, int to){
+        int minindex = from;
+        int minvalue = a[from];
+
+        for (int i = from + 1; i < to; i++){
+            if (a[i] > minvalue){
+                minindex = i;
+                minvalue = a[i];
+            }
+        }
+        return minindex;
     }
 }
