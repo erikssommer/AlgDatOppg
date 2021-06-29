@@ -28,4 +28,18 @@ public class Collection {
         }
         return minindex;
     }
+
+    public static <T extends Comparable<? super T>> int maks(T[] a){
+        int index = 0;
+        T value = a[index];
+
+        for (int i = 1; i < a.length; i++){
+            if (a[i].compareTo(value) > 0) {
+                value = a[i];
+                index = i;
+            }
+        }
+
+        return index;
+    }
 }
