@@ -3,7 +3,7 @@
 *.txt
 # Log file
 *.log
-
+/out
 #For mac users
 .DS_Store
 
