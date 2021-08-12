@@ -30,6 +30,19 @@ public class Collection {
         return minindex;
     }
 
+    public static int tournament(int[] a, int begin, int end) {
+        for (int i = begin; i > 0; --i) {
+            int left = 2 * i;
+            int right = 2 * i + 1;
+            if (a[left] > a[right]) {
+                a[i] = a[left];
+            } else {
+                a[i] = a[right];
+            }
+        }
+        return a[1];
+    }
+
     public static <T extends Comparable<? super T>> int maks(T[] a) {
         int index = 0;
         T value = a[index];
