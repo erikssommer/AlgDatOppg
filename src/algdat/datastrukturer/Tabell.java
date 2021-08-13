@@ -125,12 +125,16 @@ public class Tabell {
         for (int i = 0; i < liste.length; i++) {
             for (int j = i + 1; j < liste.length; j++) {
                 if (liste[i].compareTo(liste[j]) > 0) {
-                    T tmp = liste[i];
-                    liste[i] = liste[j];
-                    liste[j] = tmp;
+                    bytt(liste, i, j);
                 }
             }
         }
+    }
+
+    public static <T extends Comparable<? super T>> void bytt(T[] a, int i, int j){
+        T tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
     }
 
     public static void fratilKontroll(int tabellengde, int fra, int til) {
