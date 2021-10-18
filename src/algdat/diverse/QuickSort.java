@@ -23,6 +23,7 @@ public class QuickSort {
         //Gjenta for høyre og venstre subliste
         quickSort(values, left, newPivotIndex-1);
         quickSort(values, newPivotIndex+1, right);
+        // Bug fix
     }
 
     public static int partition(int[] values, int begin, int end, int pivotIndex){
